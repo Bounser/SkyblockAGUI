@@ -7,11 +7,9 @@ import me.bounser.skyblockagui.listeners.InteractionListener;
 import me.bounser.skyblockagui.listeners.IslandListener;
 import me.bounser.skyblockagui.listeners.TeleportListener;
 import me.bounser.skyblockagui.tools.Data;
-import me.bounser.skyblockagui.tools.InstancesManager;
 import me.leoko.advancedgui.manager.GuiWallManager;
 import me.leoko.advancedgui.utils.GuiWallInstance;
 import org.bukkit.Bukkit;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class SkyblockAGUI extends JavaPlugin {
@@ -30,11 +28,10 @@ public final class SkyblockAGUI extends JavaPlugin {
         // GUI creation/disband
         Bukkit.getPluginManager().registerEvents(new IslandListener(), this);
 
+        // Resources regarding dynamic placing
         if(data.dynamicPlacing()){
             Bukkit.getPluginManager().registerEvents(new TeleportListener(), this);
             Bukkit.getPluginManager().registerEvents(new ConnectionListener(), this);
-
-
         }
 
         // REGISTRATION

@@ -1,11 +1,13 @@
 package me.bounser.skyblockagui.listeners;
 
-import com.bgsoftware.superiorskyblock.api.events.IslandCreateEvent;
 import com.bgsoftware.superiorskyblock.api.events.IslandDisbandEvent;
 import com.bgsoftware.superiorskyblock.api.events.IslandSchematicPasteEvent;
 import me.bounser.skyblockagui.tools.Data;
 import me.bounser.skyblockagui.tools.InstancesManager;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -24,7 +26,7 @@ public class IslandListener implements Listener {
         if(!data.dynamicPlacing()){
             // Load the chunks before placing the GUI.
             for(Chunk c : e.getIsland().getAllChunks()){ if(!c.isLoaded()) c.load(); }
-            InstancesManager.getInstance().placeGUI(data.getLocation(e.getIsland(), type), data.getDirection(schem, type), data.getLayout(type), true );
+            InstancesManager.getInstance().placeGUI(data.getLocation(e.getIsland(), type), data.getDirection(schem, type), data.getLayout(schem, type), true );
         } else {
 
 

@@ -1,7 +1,6 @@
 package me.bounser.skyblockagui.commands;
 
 import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
-import me.bounser.skyblockagui.listeners.InteractionListener;
 import me.bounser.skyblockagui.tools.Data;
 import me.bounser.skyblockagui.tools.RegisterManager;
 import org.bukkit.ChatColor;
@@ -30,7 +29,7 @@ public class SetCommand implements CommandExecutor {
             RegisterManager.getInstance().setPlayerFirstRegister((Player) sender);
 
             Data data = Data.getInstance();
-            data.setLayout(args[0], data.getType((Player) sender), data.getSchemFromPlayer((Player) sender));
+            data.setLayout(args[0], data.getType(((Player) sender).getLocation()), data.getSchemFromPlayer((Player) sender));
 
         } else {
             System.out.printf("Command is not available for console.");

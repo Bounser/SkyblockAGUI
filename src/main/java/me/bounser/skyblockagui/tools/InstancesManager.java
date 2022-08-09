@@ -11,11 +11,6 @@ public class InstancesManager {
 
     private static InstancesManager instance;
 
-
-    private InstancesManager(){
-
-    }
-
     public static InstancesManager getInstance(){
         if(instance != null) return instance;
 
