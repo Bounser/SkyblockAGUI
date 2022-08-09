@@ -15,12 +15,6 @@ public class Data {
 
     private Data(){
         main = SkyblockAGUI.getInstance();
-
-        for(String type : ArrayList<String>())
-        while(main.getConfig().getInt(Islands.))
-
-
-
     }
 
     public static Data getInstance(){
