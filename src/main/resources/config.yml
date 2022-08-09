@@ -4,7 +4,7 @@ Options:
   activation_radius: 6
   # Use this option to change all the blocks behind the GUI every time the GUI is charged.
   replace_blocks:
-    enabled: false
+    enabled: true
     material: STONE
   # Every time the GUI is loaded it will remove every block that is in the screen (E.g. in case the player pushes a block with a piston)
   remove_screen_blocks: true
@@ -46,9 +46,9 @@ GUIs:
     nether:
       enabled: false
       offset:
-        x: 10
-        y: 5
-        z: 3
+        x: 1
+        y: 15
+        z: 5
         facing: north
         layout: "GUInether"
         height: 3
@@ -56,8 +56,8 @@ GUIs:
     the_end:
       enabled: false
       offset:
-        x: 12
-        y: 3
+        x: 1
+        y: 13
         z: 3
       facing: south
       layout: "GUIend"
@@ -69,8 +69,8 @@ GUIs:
       enabled: false
       offset:
         x: 12
-        y: 3
-        z: 3
+        y: 5
+        z: 2
       facing: west
       layout: "desertGUIoverworld"
       height: 3
@@ -80,7 +80,7 @@ GUIs:
       offset:
         x: 10
         y: 5
-        z: 3
+        z: 23
       facing: north
       layout: "desertGUInether"
       height: 3
@@ -88,9 +88,9 @@ GUIs:
     the_end:
       enabled: false
       offset:
-        x: 12
-        y: 3
-        z: 3
+        x: 3
+        y: 6
+        z: 23
       facing: south
       layout: "desertGUIend"
       height: 2

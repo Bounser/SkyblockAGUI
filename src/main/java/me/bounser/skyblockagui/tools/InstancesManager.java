@@ -28,6 +28,14 @@ public class InstancesManager {
 
     // Method to place GUIs
     public void placeGUI(Location loc, Direction dir, String Layout, boolean persistant){
+
+        Data data = Data.getInstance();
+
+        if(data.getSetAir()) SetupManager.getInstance().clearArea(SuperiorSkyblockAPI.getIslandAt(loc), data.getType(loc));
+        if(data.getReplace()) SetupManager.getInstance().setBackground(SuperiorSkyblockAPI.getIslandAt(loc), data.getType(loc));
+
+        SetupManager.getInstance().setupItemFrames(SuperiorSkyblockAPI.getIslandAt(loc), data.getType(loc));
+
         if(GUIset(loc)) return;
         GuiWallManager.getInstance().registerInstance(
                 new GuiWallInstance(
@@ -59,11 +67,12 @@ public class InstancesManager {
 
     public boolean GUIset(Location loc){ if(getGUI(loc) != null) return true; return false; }
 
-    public void executeDynamicRemoval(Player player){
-        Island is = SuperiorSkyblockAPI.getIslandAt(player.getLocation());
+    public void executeDynamicRemoval(Location loc){
+        Island is = SuperiorSkyblockAPI.getIslandAt(loc);
+        if(is == null) return;
 
         switch(Data.getInstance().getMode()){
-            // Remove GUIs if there isnt any member.
+            // Remove GUIs if there isn't any member on the island.
             case 1:
 
                 boolean none = true;
@@ -76,7 +85,7 @@ public class InstancesManager {
                     InstancesManager.getInstance().removeAllIslandGUIs(is);
                 }
                 break;
-            // Remove GUIs if the owner isnt in the island.
+            // Remove GUIs if the owner isn't on the island.
             case 2:
                 boolean owner = true;
                 for(SuperiorPlayer p : is.getAllPlayersInside()){
@@ -89,7 +98,7 @@ public class InstancesManager {
                 }
 
                 break;
-            // Remove GUIs if any member isnt online.
+            // Remove GUIs if any member isn't online.
             case 3:
                 boolean online = true;
                 for(Player p : Bukkit.getOnlinePlayers()){
@@ -103,8 +112,11 @@ public class InstancesManager {
                 break;
         }
     }
-    public void executeDynamicPlacement(Player player){
-        Island is = SuperiorSkyblockAPI.getIslandAt(player.getLocation());
+    public void executeDynamicPlacement(Player player, Boolean at){
+        Island is = null;
+        if(at){ is = SuperiorSkyblockAPI.getIslandAt(player.getLocation()); }
+        else { is = SuperiorSkyblockAPI.getPlayer(player).getIsland(); }
+        if(is == null) return;
         Data data = Data.getInstance();
 
         String type = data.getType(player.getLocation());
@@ -130,6 +142,14 @@ public class InstancesManager {
                         false);
                 break;
             }
+        }
+    }
+
+    public void checkForPlayers(){
+        for(Player p : Bukkit.getServer().getOnlinePlayers()){
+
+            if(SuperiorSkyblockAPI.getPlayer(p).getIsland()!=null) executeDynamicPlacement(p, false);
+
         }
     }
 

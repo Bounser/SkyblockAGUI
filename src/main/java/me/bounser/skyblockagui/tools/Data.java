@@ -34,6 +34,12 @@ public class Data {
 
     public int getMode(){ return main.getConfig().getInt("Options.dynamicPlacing.mode"); }
 
+    public boolean getSetAir(){ return main.getConfig().getBoolean("Options.remove_screen_blocks"); }
+
+    public boolean getReplace(){ return main.getConfig().getBoolean("Options.replace_blocks.enabled"); }
+
+    public String getMat(){ return main.getConfig().getString("Options.replace_blocks.material"); }
+
     // SETTERS
 
     public void setValue(String schem, String type, String path, String value){
@@ -83,19 +89,6 @@ public class Data {
         return main.getConfig().getString("GUIs." + schem + "." + type + ".layout");
     }
 
-    public World.Environment getEnviroment(Player player) {
-
-        World.Environment environment = World.Environment.NORMAL;
-
-        if (player.getWorld().getName().contains("_nether")) {
-            environment = World.Environment.NETHER;
-        } else if (player.getWorld().getName().contains("_the_end")) {
-            environment = World.Environment.THE_END;
-        }
-
-        return environment;
-    }
-
     static public World.Environment getEnviromentFromType(String type) {
 
         World.Environment environment = World.Environment.NORMAL;
@@ -115,9 +108,9 @@ public class Data {
         }
     }
 
-    public int getWidth(String type){ return main.getConfig().getInt("GUIs." + type + ".wide"); }
+    public int getWidth(String schem, String type){ return main.getConfig().getInt("GUIs." + schem + "." + type + ".wide"); }
 
-    public int getHeight(String type){ return main.getConfig().getInt("GUIs." + type + ".height"); }
+    public int getHeight(String schem, String type){ return main.getConfig().getInt("GUIs." + schem + "." + type + ".height"); }
 
     public Location getLocation(Island island, String type) {
         String schem = island.getSchematicName();

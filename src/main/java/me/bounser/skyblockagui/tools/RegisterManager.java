@@ -72,10 +72,10 @@ public class RegisterManager {
         data.save();
         // Gets the direction from the entity.
         switch(entity.getFacing().toString()){
-            case "BlockFace.EAST": data.setValue(type, schem, "facing", "east");
-            case "BlockFace.WEAST": data.setValue(type, schem, "facing", "weast");
-            case "BlockFace.NORTH": data.setValue(type, schem, "facing", "north");
-            case "BlockFace.SOUTH": data.setValue(type, schem, "facing", "south");
+            case "BlockFace.EAST": data.setValue(type, schem, "facing", "EAST");
+            case "BlockFace.WEAST": data.setValue(type, schem, "facing", "WEAST");
+            case "BlockFace.NORTH": data.setValue(type, schem, "facing", "NORTH");
+            case "BlockFace.SOUTH": data.setValue(type, schem, "facing", "SOUTH");
         }
         // Saves values.
         data.save();

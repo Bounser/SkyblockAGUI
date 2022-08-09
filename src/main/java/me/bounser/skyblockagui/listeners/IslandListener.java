@@ -2,6 +2,7 @@ package me.bounser.skyblockagui.listeners;
 
 import com.bgsoftware.superiorskyblock.api.events.IslandDisbandEvent;
 import com.bgsoftware.superiorskyblock.api.events.IslandSchematicPasteEvent;
+import com.bgsoftware.superiorskyblock.api.events.PlayerChangeRoleEvent;
 import me.bounser.skyblockagui.tools.Data;
 import me.bounser.skyblockagui.tools.InstancesManager;
 import org.bukkit.Bukkit;
@@ -29,7 +30,6 @@ public class IslandListener implements Listener {
             InstancesManager.getInstance().placeGUI(data.getLocation(e.getIsland(), type), data.getDirection(schem, type), data.getLayout(schem, type), true );
         } else {
 
-
         }
     }
 
@@ -47,5 +47,13 @@ public class IslandListener implements Listener {
                 Bukkit.getLogger().info(ChatColor.RED + "GUI could not be removed from " + e.getPlayer().getName() + "' island (type " + type + ") (Is there none?)");
             }
         }
+    }
+
+    @EventHandler
+    public void onRolChange(PlayerChangeRoleEvent e){
+
+        if(e.getNewRole().getPreviousRole() != null && (e.getNewRole().getWeight()) > e.getNewRole().getPreviousRole().getWeight())
+        InstancesManager.getInstance().executeDynamicPlacement(e.getPlayer().asPlayer(), true);
+        else InstancesManager.getInstance().executeDynamicRemoval(e.getPlayer().asPlayer());
     }
 }

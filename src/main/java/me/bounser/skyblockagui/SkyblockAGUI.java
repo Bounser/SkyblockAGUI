@@ -7,6 +7,7 @@ import me.bounser.skyblockagui.listeners.InteractionListener;
 import me.bounser.skyblockagui.listeners.IslandListener;
 import me.bounser.skyblockagui.listeners.TeleportListener;
 import me.bounser.skyblockagui.tools.Data;
+import me.bounser.skyblockagui.tools.InstancesManager;
 import me.leoko.advancedgui.manager.GuiWallManager;
 import me.leoko.advancedgui.utils.GuiWallInstance;
 import org.bukkit.Bukkit;
@@ -39,6 +40,9 @@ public final class SkyblockAGUI extends JavaPlugin {
 
         getCommand("setguilocation").setExecutor(new SetCommand());
         getCommand("cancel").setExecutor(new CancelCommand());
+
+        // Creates GUIs in case there is any player online (Forcing reload)
+        InstancesManager.getInstance().checkForPlayers();
     }
 
     @Override
