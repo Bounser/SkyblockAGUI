@@ -43,7 +43,7 @@ public class ConnectionListener implements Listener {
     public void onQuit(PlayerQuitEvent e){
 
         if(Data.getInstance().dynamicPlacing())
-        InstancesManager.getInstance().executeDynamicRemoval(e.getPlayer());
+        InstancesManager.getInstance().executeDynamicRemoval(e.getPlayer().getLocation());
 
     }
 }

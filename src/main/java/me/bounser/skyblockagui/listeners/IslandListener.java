@@ -24,13 +24,11 @@ public class IslandListener implements Listener {
         String type = data.getType(e.getLocation());
         String schem = data.getSchematic(e.getIsland());
 
-        if(!data.dynamicPlacing()){
-            // Load the chunks before placing the GUI.
-            for(Chunk c : e.getIsland().getAllChunks()){ if(!c.isLoaded()) c.load(); }
-            InstancesManager.getInstance().placeGUI(data.getLocation(e.getIsland(), type), data.getDirection(schem, type), data.getLayout(schem, type), true );
-        } else {
-
-        }
+        boolean persistant = false;
+        if(data.dynamicPlacing()) persistant = true;
+        // Load the chunks before placing the GUI.
+        for(Chunk c : e.getIsland().getAllChunks()){ if(!c.isLoaded()) c.load(); }
+        InstancesManager.getInstance().placeGUI(data.getLocation(e.getIsland(), type), data.getDirection(schem, type), data.getLayout(schem, type), persistant );
     }
 
     // Removes GUI when disbanding the island.
@@ -54,6 +52,6 @@ public class IslandListener implements Listener {
 
         if(e.getNewRole().getPreviousRole() != null && (e.getNewRole().getWeight()) > e.getNewRole().getPreviousRole().getWeight())
         InstancesManager.getInstance().executeDynamicPlacement(e.getPlayer().asPlayer(), true);
-        else InstancesManager.getInstance().executeDynamicRemoval(e.getPlayer().asPlayer());
+        else InstancesManager.getInstance().executeDynamicRemoval(e.getPlayer().asPlayer().getLocation());
     }
 }
