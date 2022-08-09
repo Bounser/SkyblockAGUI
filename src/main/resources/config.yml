@@ -13,7 +13,7 @@ Options:
     enabled: false
     # Modes available:
     # 1 = onIsland (Only summons the GUI if there's any member on the island (Ignoring visitors))
-    # 2 = onIslandOwner (Only if the person on the island is the owner of the island)
+    # 2 = onIslandOwner (Only if the owner of the island is on the island)
     # 3 = onOnline (Places the GUI if a member of the island is online)
     mode: 2
 

@@ -1,6 +1,5 @@
 package me.bounser.skyblockagui.commands;
 
-import me.bounser.skyblockagui.listeners.InteractionListener;
 import me.bounser.skyblockagui.tools.RegisterManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

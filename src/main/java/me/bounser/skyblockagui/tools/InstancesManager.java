@@ -1,11 +1,19 @@
 package me.bounser.skyblockagui.tools;
 
+import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
+import com.bgsoftware.superiorskyblock.api.island.Island;
+import com.bgsoftware.superiorskyblock.api.wrappers.SuperiorPlayer;
 import me.leoko.advancedgui.manager.GuiWallManager;
 import me.leoko.advancedgui.manager.LayoutManager;
 import me.leoko.advancedgui.utils.Direction;
 import me.leoko.advancedgui.utils.GuiLocation;
 import me.leoko.advancedgui.utils.GuiWallInstance;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class InstancesManager {
 
@@ -37,7 +45,92 @@ public class InstancesManager {
         return true;
     }
 
+    public void removeAllIslandGUIs(Island is){
+        Data data = Data.getInstance();
+        for(String type : new ArrayList<String>(Arrays.asList("overworld", "nether", "the_end")) ) {
+            Location guiLoc = data.getLocation(is, type);
+            if (InstancesManager.getInstance().GUIset(data.getLocation(is, type))) {
+                removeGUI(data.getLocation(is, type));
+                }
+            }
+        }
+
     public GuiWallInstance getGUI(Location loc){ return GuiWallManager.getInstance().getActiveInstance(loc); }
 
     public boolean GUIset(Location loc){ if(getGUI(loc) != null) return true; return false; }
+
+    public void executeDynamicRemoval(Player player){
+        Island is = SuperiorSkyblockAPI.getIslandAt(player.getLocation());
+
+        switch(Data.getInstance().getMode()){
+            // Remove GUIs if there isnt any member.
+            case 1:
+
+                boolean none = true;
+                for(SuperiorPlayer p : is.getAllPlayersInside()){
+                    if(is.getIslandMembers().contains(p)){
+                        none = false;
+                    }
+                }
+                if(none){
+                    InstancesManager.getInstance().removeAllIslandGUIs(is);
+                }
+                break;
+            // Remove GUIs if the owner isnt in the island.
+            case 2:
+                boolean owner = true;
+                for(SuperiorPlayer p : is.getAllPlayersInside()){
+                    if(is.getOwner().equals(p)){
+                        owner = false;
+                    }
+                }
+                if(owner){
+                    InstancesManager.getInstance().removeAllIslandGUIs(is);
+                }
+
+                break;
+            // Remove GUIs if any member isnt online.
+            case 3:
+                boolean online = true;
+                for(Player p : Bukkit.getOnlinePlayers()){
+                    if(is.getIslandMembers().contains(p)){
+                        online = false;
+                    }
+                }
+                if(online){
+                    InstancesManager.getInstance().removeAllIslandGUIs(is);
+                }
+                break;
+        }
+    }
+    public void executeDynamicPlacement(Player player){
+        Island is = SuperiorSkyblockAPI.getIslandAt(player.getLocation());
+        Data data = Data.getInstance();
+
+        String type = data.getType(player.getLocation());
+
+        if(InstancesManager.getInstance().GUIset(Data.getInstance().getLocation(is, type))) return;
+
+        switch(Data.getInstance().getMode()){
+            case 1: if(!GUIset(data.getLocation(is, type)) && is.getIslandMembers().contains(player)){
+
+                InstancesManager.getInstance().placeGUI(
+                        data.getLocation(is, type),
+                        data.getDirection(data.getSchematic(is), type),
+                        data.getLayout(data.getSchematic(is), type),
+                        false);
+                break;
+            }
+            case 2: if(!GUIset(data.getLocation(is, type)) && is.getOwner().getName().equals(player.getName())){
+
+                InstancesManager.getInstance().placeGUI(
+                        data.getLocation(is, type),
+                        data.getDirection(data.getSchematic(is), type),
+                        data.getLayout(data.getSchematic(is), type),
+                        false);
+                break;
+            }
+        }
+    }
+
 }
