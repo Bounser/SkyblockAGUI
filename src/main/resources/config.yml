@@ -6,61 +6,86 @@ Options:
   dynamicPlacing:
     enabled: false
     # Modes available:
-    # 1 = onIsland (Only summons the GUI if there's someone in the island)
-    # 2 = onIslandOwner (Only if the person in the island is the owner of the island)
+    # 1 = onIsland (Only summons the GUI if there's any member on the island (Ignoring visitors))
+    # 2 = onIslandOwner (Only if the person on the island is the owner of the island)
     # 3 = onOnline (Places the GUI if a member of the island is online)
     mode: 2
 
 
 # Information on the GUIs attributes and relative position
 #
-# Modify this values manually or with the command /setlocation (command recommended)
+# Modify this values manually or with the command /setlocation <Layout> (command recommended)
 
-Setups:
-  overworld:
-    1:
-      schematic: "default"
-      enabled: "false"
+GUIs:
+  # Schematic name
+  normal:
+    # Type of world in which the GUI settings will apply.
+    overworld:
+      # Place GUI? If its set to false no GUI will be placed.
+      enabled: false
+      # Offset of the GUI from the center of the island.
+      # Recommended to use the command /setlocation <Layout>
+      offset:
+        x: 12
+        y: 3
+        z: 3
+      # Orientation of the GUI. (Also recommended to use the command)
+      facing: west
+      # Layout that will be used.
+      layout: "GUIoverworld"
+      # height of the layout
+      height: 3
+      # width of the layout
+      width: 5
+    nether:
+      enabled: false
+      offset:
+        x: 10
+        y: 5
+        z: 3
+        facing: north
+        layout: "GUInether"
+        height: 3
+        width: 2
+    the_end:
+      enabled: false
+      offset:
+        x: 12
+        y: 3
+        z: 3
+      facing: south
+      layout: "GUIend"
+      height: 2
+      width: 4
+  # Example using other schematic.
+  desert:
+    overworld:
+      enabled: false
       offset:
         x: 12
         y: 3
         z: 3
       facing: west
-      layout: "SuperiorGUI"
+      layout: "GUIoverworld"
       height: 3
-      wide: 5
-    2:
-      schematic: "desert"
-      enabled: "false"
+      width: 5
+    nether:
+      enabled: false
       offset:
         x: 10
-        y: 3
-        z: 2
+        y: 5
+        z: 3
       facing: north
-      layout: "DesertGUI"
+      layout: "GUInether"
+      height: 3
+      width: 2
+    the_end:
+      enabled: false
+      offset:
+        x: 12
+        y: 3
+        z: 3
+      facing: south
+      layout: "GUIend"
       height: 2
-      wide: 2
-  nether:
-    1:
-      schematic:
-      enabled: "false"
-      offset:
-        x:
-        y:
-        z:
-      facing:
-      layout:
-      height:
-      wide:
-  end:
-    1:
-      schematic:
-      enabled: "false"
-      offset:
-        x:
-        y:
-        z:
-      facing:
-      layout:
-      height:
-      wide:
+      width: 4
