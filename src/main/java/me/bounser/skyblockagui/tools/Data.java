@@ -3,7 +3,6 @@ package me.bounser.skyblockagui.tools;
 import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
 import com.bgsoftware.superiorskyblock.api.island.Island;
 import me.bounser.skyblockagui.SkyblockAGUI;
-import me.bounser.skyblockagui.listeners.InteractionListener;
 import me.leoko.advancedgui.utils.Direction;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -12,7 +11,17 @@ import org.bukkit.entity.Player;
 public class Data {
 
     private static Data instance;
-    public static SkyblockAGUI main = SkyblockAGUI.getInstance();
+    private static SkyblockAGUI main;
+
+    private Data(){
+        main = SkyblockAGUI.getInstance();
+
+        for(String type : ArrayList<String>())
+        while(main.getConfig().getInt(Islands.))
+
+
+
+    }
 
     public static Data getInstance(){
         if(instance != null) return instance;
@@ -21,7 +30,30 @@ public class Data {
         return instance;
     }
 
-    static public int[] getOffset(String type){
+    public void save(){ main.saveConfig(); }
+
+    // OPTIONS
+
+    public boolean dynamicPlacing(){ return main.getConfig().getBoolean("Options.dynamicPlacing.enabled"); }
+
+    // SETTERS
+
+    public void setValue(String type, String schem, String path, String value){
+        main.getConfig().set("Islands." + type + "." + schem + "." + path, value);
+    }
+
+    public void setLayout(String LayoutName, String type, String schem){
+        main.getConfig().set("Islands." + type + ".layout", LayoutName);
+        main.saveConfig();
+    }
+
+    // GETTERS
+
+    public int getRadius(){ return main.getConfig().getInt("activation_radius"); }
+
+    public String getSchemFromPlayer(Player player){ return SuperiorSkyblockAPI.getIslandAt(p.getLocation()).getSchematicName(); }
+
+    public int[] getOffset(String type){
         int i[] = new int[3];
         i[0] = main.getConfig().getInt("Islands." + type + ".offset.x");
         i[1] = main.getConfig().getInt("Islands." + type + ".offset.y");
@@ -29,12 +61,12 @@ public class Data {
         return i;
     }
 
-    static public boolean valuesSet(String type){
+    public boolean valuesSet(String type){
         if(main.getConfig().getString("Islands." + type + ".layout") == null) return false;
         return true;
     }
 
-    static public Direction getDirection(String type){
+    public Direction getDirection(String type){
         Direction direction = null;
         if(main.getConfig().getString("Islands." + type + ".facing").equalsIgnoreCase("west")) direction = Direction.WEST;
         if(main.getConfig().getString("Islands." + type + ".facing").equalsIgnoreCase("north")) direction = Direction.NORTH;
@@ -43,16 +75,11 @@ public class Data {
         return direction;
     }
 
-    static public String getLayout(String type){
+    public String getLayout(String type){
         return main.getConfig().getString("Islands." + type + ".layout");
     }
 
-    public static void setLayout(String LayoutName, String type){
-        main.getConfig().set("Islands." + type + ".layout", LayoutName);
-        main.saveConfig();
-    }
-
-    static public World.Environment getEnviroment(Player nick) {
+    public World.Environment getEnviroment(Player nick) {
 
         World.Environment environment = World.Environment.NORMAL;
 
@@ -75,28 +102,26 @@ public class Data {
         return environment;
     }
 
-    static public String getType(Player player) {
-
-        String type = null;
-
-        if (player.getWorld().getName().contains("nether")) type = "nether"; else
-        if (player.getWorld().getName().contains("the_end")) type = "the_end"; else
-            type = "overworld";
-
-        return type;
+    public String getType(Player player) {
+        switch(player.getWorld().getEnvironment()){
+            case NORMAL: return "overworld";
+            case NETHER: return "nether";
+            case THE_END: return "the_end";
+            default: return null;
+        }
     }
 
-    static public int getWidth(String type){ return main.getConfig().getInt("Islands." + type + ".wide"); }
+    public int getWidth(String type){ return main.getConfig().getInt("Islands." + type + ".wide"); }
 
-    static public int getHeight(String type){ return main.getConfig().getInt("Islands." + type + ".height"); }
+    public int getHeight(String type){ return main.getConfig().getInt("Islands." + type + ".height"); }
 
-    public static Location getLocation(Island island, String type) {
-        return island.getCenter(Data.getEnviromentFromType(type)).add(Data.getOffset(type)[0],Data.getOffset(type)[1],Data.getOffset(type)[2]);
+    public Location getLocation(Island island, String type) {
+        return island.getCenter(Data.getEnviromentFromType(type)).add(getOffset(type)[0],getOffset(type)[1],getOffset(type)[2]);
     }
 
-    public static Location getLocation(String nick, String type) {
-        if(!(SuperiorSkyblockAPI.getPlayer(nick).getIsland() == null))
-            return SuperiorSkyblockAPI.getPlayer(nick).getIsland().getCenter(Data.getEnviromentFromType(type)).add(Data.getOffset(type)[0],Data.getOffset(type)[1],Data.getOffset(type)[2]);
+    public Location getCenterLocation(Player player, String type) {
+        if(!(SuperiorSkyblockAPI.getPlayer(player).getIsland() == null))
+            return SuperiorSkyblockAPI.getPlayer(player).getIsland().getCenter(Data.getEnviromentFromType(type)).add(getOffset(type)[0],getOffset(type)[1],getOffset(type)[2]);
         return null;
     }
 

@@ -17,22 +17,20 @@ public class SetCommand implements CommandExecutor {
 
         if(sender instanceof Player){
             if(RegisterManager.getInstance().isRegistering((Player) sender, "Both")){
-                sender.sendMessage(ChatColor.RED + "You are already placing a GUI! cancel with /cancel");
-                return false;
+                sender.sendMessage(ChatColor.RED + "You are already placing a GUI! cancel with /cancel"); return false;
             }
             if(SuperiorSkyblockAPI.getIslandAt(((Player) sender).getLocation())==null){
-                sender.sendMessage(ChatColor.RED + "You are not on a valid island!");
-                return false;
+                sender.sendMessage(ChatColor.RED + "You are not on a valid island!"); return false;
             }
             if(args.length != 1){
-                sender.sendMessage(ChatColor.RED + "Invalid usage of the command. Use: /setlocation <layoutName>");
-                return false;
+                sender.sendMessage(ChatColor.RED + "Invalid usage of the command. Use: /setlocation <layoutName>"); return false;
             }
 
             sender.sendMessage(ChatColor.GREEN + "You started the registering mode! Right-click in the top left corner of the desired location.");
-            RegisterManager.getInstance().setFirstRegister((Player) sender);
+            RegisterManager.getInstance().setPlayerFirstRegister((Player) sender);
 
-            Data.setLayout(args[0], Data.getType((Player) sender));
+            Data data = Data.getInstance();
+            data.setLayout(args[0], data.getType((Player) sender), data.getSchemFromPlayer((Player) sender));
 
         } else {
             System.out.printf("Command is not available for console.");

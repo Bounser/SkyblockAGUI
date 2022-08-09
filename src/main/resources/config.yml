@@ -1,6 +1,7 @@
 # General options.
 #
 Options:
+  activation_radius: 6
   # Enables the dynamic placing. If you disable it, the plugin will only place the GUIs statically.
   dynamicPlacing:
     enabled: false
@@ -15,34 +16,51 @@ Options:
 #
 # Modify this values manually or with the command /setlocation (command recommended)
 
-Islands:
+Setups:
   overworld:
-    enabled: "false"
-    offset:
-      x: 12
-      y: 3
-      z: 3
-    facing: west
-    layout: "SuperiorGUI"
-    height: 3
-    wide: 5
+    1:
+      schematic: "default"
+      enabled: "false"
+      offset:
+        x: 12
+        y: 3
+        z: 3
+      facing: west
+      layout: "SuperiorGUI"
+      height: 3
+      wide: 5
+    2:
+      schematic: "desert"
+      enabled: "false"
+      offset:
+        x: 10
+        y: 3
+        z: 2
+      facing: north
+      layout: "DesertGUI"
+      height: 2
+      wide: 2
   nether:
-    enabled: "false"
-    offset:
-      x:
-      y:
-      z:
-    facing:
-    layout:
-    height:
-    wide:
-  the_end:
-    enabled: "false"
-    offset:
-      x:
-      y:
-      z:
-    facing:
-    layout:
-    height:
-    wide:
+    1:
+      schematic:
+      enabled: "false"
+      offset:
+        x:
+        y:
+        z:
+      facing:
+      layout:
+      height:
+      wide:
+  end:
+    1:
+      schematic:
+      enabled: "false"
+      offset:
+        x:
+        y:
+        z:
+      facing:
+      layout:
+      height:
+      wide:
