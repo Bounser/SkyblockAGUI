@@ -11,6 +11,11 @@ public class InstancesManager {
 
     private static InstancesManager instance;
 
+
+    private InstancesManager(){
+
+    }
+
     public static InstancesManager getInstance(){
         if(instance != null) return instance;
 
@@ -20,6 +25,7 @@ public class InstancesManager {
 
     // Method to place GUIs
     public void placeGUI(Location loc, Direction dir, String Layout, boolean persistant){
+        if(GUIset(loc)) return;
         GuiWallManager.getInstance().registerInstance(
                 new GuiWallInstance(
                         GuiWallManager.getInstance().getNextId(),

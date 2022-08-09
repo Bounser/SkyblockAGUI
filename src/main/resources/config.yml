@@ -2,6 +2,12 @@
 #
 Options:
   activation_radius: 6
+  # Use this option to change all the blocks behind the GUI every time the GUI is charged.
+  replace_blocks:
+    enabled: false
+    material: STONE
+  # Every time the GUI is loaded it will remove every block that is in the screen (E.g. in case the player pushes a block with a piston)
+  remove_screen_blocks: true
   # Enables the dynamic placing. If you disable it, the plugin will only place the GUIs and they'll stay permanently.
   dynamicPlacing:
     enabled: false
