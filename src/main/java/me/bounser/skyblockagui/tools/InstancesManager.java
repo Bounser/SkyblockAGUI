@@ -18,6 +18,7 @@ public class InstancesManager {
         return instance;
     }
 
+    // Method to place GUIs
     public void placeGUI(Location loc, Direction dir, String Layout, boolean persistant){
         GuiWallManager.getInstance().registerInstance(
                 new GuiWallInstance(
@@ -27,5 +28,15 @@ public class InstancesManager {
         );
     }
 
+    // Method to remove GUIs
+    public boolean removeGUI(Location loc){
+        GuiWallInstance gwi = InstancesManager.getInstance().getGUI(loc);
+        if(gwi == null) return false;
+        GuiWallManager.getInstance().unregisterInstance(gwi, true);
+        return true;
+    }
 
+    public GuiWallInstance getGUI(Location loc){ return GuiWallManager.getInstance().getActiveInstance(loc); }
+
+    public boolean GUIset(Location loc){ if(getGUI(loc) != null) return true; return false; }
 }
