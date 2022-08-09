@@ -20,7 +20,7 @@ Options:
 
 # Information on the GUIs attributes and relative position
 #
-# Modify this values manually or with the command /setlocation <Layout> (command recommended)
+# Modify this values manually or with the command /setguilocation <Layout> (command recommended)
 
 GUIs:
   # Schematic name
@@ -30,7 +30,7 @@ GUIs:
       # Place GUI? If its set to false no GUI will be placed.
       enabled: false
       # Offset of the GUI from the center of the island.
-      # Recommended to use the command /setlocation <Layout>
+      # Recommended to use the command /setguilocation <Layout>
       offset:
         x: 12
         y: 3

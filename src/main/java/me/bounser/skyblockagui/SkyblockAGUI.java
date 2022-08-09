@@ -37,7 +37,7 @@ public final class SkyblockAGUI extends JavaPlugin {
         // REGISTRATION
         Bukkit.getPluginManager().registerEvents(new InteractionListener(), this);
 
-        getCommand("setlocation").setExecutor(new SetCommand());
+        getCommand("setguilocation").setExecutor(new SetCommand());
         getCommand("cancel").setExecutor(new CancelCommand());
     }
 

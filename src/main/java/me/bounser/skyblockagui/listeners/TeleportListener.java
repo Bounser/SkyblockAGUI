@@ -1,9 +1,6 @@
 package me.bounser.skyblockagui.listeners;
 
 import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
-import com.bgsoftware.superiorskyblock.api.island.Island;
-import com.google.gson.InstanceCreator;
-import me.bounser.skyblockagui.tools.Data;
 import me.bounser.skyblockagui.tools.InstancesManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
