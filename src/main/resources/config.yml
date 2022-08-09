@@ -1,0 +1,48 @@
+# General options.
+#
+Options:
+  # Enables the dynamic placing. If you disable it, the plugin will only place the GUIs statically.
+  dynamicPlacing:
+    enabled: false
+    # Modes available:
+    # 1 = onIsland (Only summons the GUI if there's someone in the island)
+    # 2 = onIslandOwner (Only if the person in the island is the owner of the island)
+    # 3 = onOnline (Places the GUI if a member of the island is online)
+    mode: 2
+
+
+# Information on the GUIs attributes and relative position
+#
+# Modify this values manually or with the command /setlocation (command recommended)
+
+Islands:
+  overworld:
+    enabled: "false"
+    offset:
+      x: 12
+      y: 3
+      z: 3
+    facing: west
+    layout: "SuperiorGUI"
+    height: 3
+    wide: 5
+  nether:
+    enabled: "false"
+    offset:
+      x:
+      y:
+      z:
+    facing:
+    layout:
+    height:
+    wide:
+  the_end:
+    enabled: "false"
+    offset:
+      x:
+      y:
+      z:
+    facing:
+    layout:
+    height:
+    wide:
