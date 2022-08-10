@@ -38,13 +38,13 @@ public class InstancesManager {
                 type.equals("overworld")) &&
                 data.getEnabledGUI(schem, type)) {
 
-                Location guiLoc = data.getLocation(is, type);
-                if (!InstancesManager.getInstance().checkGUI(data.getLocation(is, type))) {
+                Location guiLoc = data.getPlacingLocation(is, type);
+                if (!InstancesManager.getInstance().checkGUI(data.getPlacingLocation(is, type))) {
                     for (Chunk c : is.getAllChunks(data.getEnviromentFromType(type))) {
                         if (!c.isLoaded()) c.load();
                     }
                     InstancesManager.getInstance().placeGUI(
-                            data.getLocation(is, type),
+                            data.getPlacingLocation(is, type),
                             data.getDirection(schem, type),
                             data.getLayout(schem, type),
                             persistant);
@@ -87,9 +87,8 @@ public class InstancesManager {
         for(String type : new ArrayList<String>(Arrays.asList("overworld", "nether", "the_end")) ) {
 
             if((type.equals("nether") && is.isNetherEnabled()) || (type.equals("the_end") && is.isEndEnabled()) || type.equals("overworld")) {
-                Location guiLoc = data.getLocation(is, type);
-                if (InstancesManager.getInstance().checkGUI(data.getLocation(is, type)))
-                    removeGUI(data.getLocation(is, type));
+                if (InstancesManager.getInstance().checkGUI(data.getPlacingLocation(is, type)))
+                    removeGUI(data.getPlacingLocation(is, type));
             }
 
         }

@@ -29,7 +29,7 @@ public class SetupUtils {
 
         Data data = Data.getInstance();
         String schem = data.getSchematic(is);
-        Location placingLoc = data.getLocation(is, type);
+        Location placingLoc = data.getPlacingLocation(is, type);
 
         int width = data.getWidth(schem, type);
         int height = data.getHeight(schem, type);
@@ -51,6 +51,9 @@ public class SetupUtils {
 
                 placingLoc.add(0, +1, 0);
             }
+
+            Bukkit.broadcastMessage(data.getPlacingLocation(is, type).toString());
+
             switch (data.getDirection(schem, type).toString()) {
                 case "WEST":
                     placingLoc.add(0, 0, +1);
@@ -97,7 +100,7 @@ public class SetupUtils {
 
         Data data = Data.getInstance();
 
-        Location loc = data.getLocation(is, type);
+        Location loc = data.getPlacingLocation(is, type);
         String schem = data.getSchematic(is);
 
         int width = data.getWidth(schem, type);
@@ -130,7 +133,7 @@ public class SetupUtils {
 
         Data data = Data.getInstance();
 
-        Location loc = data.getLocation(is, type);
+        Location loc = data.getPlacingLocation(is, type);
         String schem = data.getSchematic(is);
 
         int width = data.getWidth(schem, type);
@@ -151,9 +154,7 @@ public class SetupUtils {
 
             for (int j = 0; j < height; j++) {
 
-                loc.getBlock().setType(Material.valueOf("Material." + data.getMat()));
-                Bukkit.broadcastMessage(Material.STONE.toString());
-                Bukkit.broadcastMessage("Material." + data.getMat());
+                loc.getBlock().setType(Material.valueOf(data.getMat()));
                 loc.add(0, +1, 0);
             }
 

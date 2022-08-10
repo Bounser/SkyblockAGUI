@@ -11,8 +11,6 @@ Options:
   # Enables the dynamic placing. If you disable it, the plugin will only place the GUIs and they'll stay permanently.
   dynamicPlacing:
     enabled: false
-    # Delets all the GUIs from the islands in case you switch between non dynamic and dynamic placement.
-    force_delete: true
     # Modes available:
     # 1 = onIsland (Only summons the GUI if there's any member on the island (Ignoring visitors))
     # 2 = onIslandOwner (Only if the owner of the island is on the island)

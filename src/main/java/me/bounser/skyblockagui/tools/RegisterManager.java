@@ -55,7 +55,7 @@ public class RegisterManager {
         String type = data.getType(entity.getLocation());
         String schem = data.getSchematic(is);
 
-        Location center = data.getCenterLocation(player, type);
+        Location center = data.getCenterLocation(is, type);
         Location interact = entity.getLocation();
 
         // Offset center-first position
@@ -99,7 +99,7 @@ public class RegisterManager {
         String type = data.getType(entity.getLocation());
 
         // Getting the first entity position.
-        Location first = data.getCenterLocation(player, type).add(
+        Location first = data.getPlacingLocation(is, type).add(
                 data.getOffset(schem, type)[0],
                 data.getOffset(schem, type)[1],
                 data.getOffset(schem, type)[2]
@@ -125,7 +125,7 @@ public class RegisterManager {
 
         removeRegister(player, "second");
         InstancesManager.getInstance().placeGUI(
-                data.getLocation(is, type),
+                data.getPlacingLocation(is, type),
                 data.getDirection(schem, type),
                 data.getLayout(schem, type),
                 false);

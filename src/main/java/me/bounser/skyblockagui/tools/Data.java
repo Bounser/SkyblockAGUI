@@ -34,8 +34,6 @@ public class Data {
 
     public boolean dynamicPlacing(){ return main.getConfig().getBoolean("Options.dynamicPlacing.enabled"); }
 
-    public boolean forceDelete(){ return main.getConfig().getBoolean("Options.dynamicPlacing.force_remove"); }
-
     public int getMode(){ return main.getConfig().getInt("Options.dynamicPlacing.mode"); }
 
     public boolean getSetAir(){ return main.getConfig().getBoolean("Options.remove_screen_blocks"); }
@@ -116,19 +114,18 @@ public class Data {
         }
     }
 
-    public int getWidth(String schem, String type){ return main.getConfig().getInt("GUIs." + schem + "." + type + ".wide"); }
+    public int getWidth(String schem, String type){ return main.getConfig().getInt("GUIs." + schem + "." + type + ".width"); }
 
     public int getHeight(String schem, String type){ return main.getConfig().getInt("GUIs." + schem + "." + type + ".height"); }
 
-    public Location getLocation(Island island, String type) {
+    public Location getPlacingLocation(Island island, String type) {
         String schem = island.getSchematicName();
-        return island.getCenter(Data.getEnviromentFromType(type)).add(getOffset(schem, type)[0],getOffset(schem, type)[1],getOffset(schem, type)[2]);
+        return getCenterLocation(island, type).add(getOffset(schem, type)[0],getOffset(schem, type)[1],getOffset(schem, type)[2]);
     }
 
-    public Location getCenterLocation(Player player, String type) {
-        if((SuperiorSkyblockAPI.getPlayer(player).getIsland() == null)) return null;
+    public Location getCenterLocation(Island is, String type) {
+        if(is == null) return null;
 
-        String schem = SuperiorSkyblockAPI.getPlayer(player).getIsland().getSchematicName();
-        return SuperiorSkyblockAPI.getPlayer(player).getIsland().getCenter(Data.getEnviromentFromType(type)).add(getOffset(schem, type)[0],getOffset(schem, type)[1],getOffset(schem, type)[2]);
+        return is.getCenter(Data.getEnviromentFromType(type));
     }
 }
