@@ -11,7 +11,6 @@ import me.leoko.advancedgui.utils.GuiWallInstance;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -33,14 +32,16 @@ public class InstancesManager {
         String schem = data.getSchematic(is);
 
         for(String type : new ArrayList<String>(Arrays.asList("overworld", "nether", "the_end")) ) {
-            Bukkit.broadcastMessage("2");
 
-            if((type.equals("nether") && is.isNetherEnabled()) || (type.equals("the_end") && is.isEndEnabled()) || type.equals("overworld")) {
+            if(((type.equals("nether") && is.isNetherEnabled()) ||
+               (type.equals("the_end") && is.isEndEnabled()) ||
+                type.equals("overworld")) &&
+                data.getEnabledGUI(schem, type)) {
+
                 Location guiLoc = data.getLocation(is, type);
                 if (!InstancesManager.getInstance().checkGUI(data.getLocation(is, type))) {
                     for (Chunk c : is.getAllChunks(data.getEnviromentFromType(type))) {
                         if (!c.isLoaded()) c.load();
-                        Bukkit.broadcastMessage("3");
                     }
                     InstancesManager.getInstance().placeGUI(
                             data.getLocation(is, type),
@@ -55,13 +56,12 @@ public class InstancesManager {
     // Method to place GUIs
     public void placeGUI(Location loc, Direction dir, String Layout, boolean persistant){
 
-        Bukkit.broadcastMessage("1");
         Data data = Data.getInstance();
 
-        if(data.getSetAir()) SetupManager.getInstance().clearArea(SuperiorSkyblockAPI.getIslandAt(loc), data.getType(loc));
-        if(data.getReplace()) SetupManager.getInstance().setBackground(SuperiorSkyblockAPI.getIslandAt(loc), data.getType(loc));
+        if(data.getSetAir()) SetupUtils.getInstance().clearArea(SuperiorSkyblockAPI.getIslandAt(loc), data.getType(loc));
+        if(data.getReplace()) SetupUtils.getInstance().setBackground(SuperiorSkyblockAPI.getIslandAt(loc), data.getType(loc));
 
-        SetupManager.getInstance().setupItemFrames(SuperiorSkyblockAPI.getIslandAt(loc), data.getType(loc));
+        SetupUtils.getInstance().setupItemFrames(SuperiorSkyblockAPI.getIslandAt(loc), data.getType(loc));
 
         GuiWallManager.getInstance().registerInstance(
                 new GuiWallInstance(
@@ -69,6 +69,7 @@ public class InstancesManager {
                         LayoutManager.getInstance().getLayout(Layout), Data.getInstance().getRadius(),
                         new GuiLocation(loc, dir)), persistant
         );
+        Bukkit.broadcastMessage("1");
     }
 
     // Method to remove GUIs (Opposed of placeGUI)

@@ -13,10 +13,14 @@ import me.leoko.advancedgui.utils.GuiWallInstance;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public final class SkyblockAGUI extends JavaPlugin {
 
     private static SkyblockAGUI instance;
-    public static SkyblockAGUI getInstance(){
+
+    public static SkyblockAGUI getInstance() {
         return instance;
     }
 
@@ -30,13 +34,14 @@ public final class SkyblockAGUI extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new IslandListener(), this);
 
         // Resources regarding dynamic placing
-        if(data.dynamicPlacing()){
+        if (data.dynamicPlacing()) {
             Bukkit.getPluginManager().registerEvents(new TeleportListener(), this);
             Bukkit.getPluginManager().registerEvents(new ConnectionListener(), this);
 
             // Creates GUIs in case there is any player online (Forcing reload)
             InstancesManager.getInstance().checkForPlayers();
 
+            Bukkit.broadcastMessage("Loaded dynamic");
             Bukkit.getLogger().info("Dynamic placing module loaded.");
         }
 
@@ -51,13 +56,17 @@ public final class SkyblockAGUI extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // If the dynamic placing is enabled, on shutdown every GUI from the islands will be deleted
-        if(Data.getInstance().dynamicPlacing()){
+        // If the dynamic placing and the force delete is enabled, on shutdown every GUI from the islands will be deleted
+        // (In case of switch between dynamic and non dynamic)
+        if (Data.getInstance().dynamicPlacing() && Data.getInstance().forceDelete()) {
 
-            for(GuiWallInstance gwi : GuiWallManager.getInstance().getActiveInstances()){
-
-                for(String Layout : Data.getInstance().getSchematics())
-                if(gwi.getLayout().getName().equals(Layout)) GuiWallManager.getInstance().unregisterInstance(gwi, true);
+            for (GuiWallInstance gwi : GuiWallManager.getInstance().getActiveInstances()) {
+                for (String schem : Data.getInstance().getSchematics()) {
+                    for (String type : new ArrayList<String>(Arrays.asList("overworld", "nether", "the_end"))) {
+                        if (gwi.getLayout().getName().equals(Data.getInstance().getLayout(schem, type)))
+                            GuiWallManager.getInstance().unregisterInstance(gwi, true);
+                    }
+                }
             }
         }
     }

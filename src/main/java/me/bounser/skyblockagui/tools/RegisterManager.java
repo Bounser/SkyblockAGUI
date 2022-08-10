@@ -85,8 +85,6 @@ public class RegisterManager {
             @Override
             public void run() {
                 setPlayerSecondRegister(player);
-                player.sendMessage(firstR.toString());
-                player.sendMessage(secondR.toString());
             }
         }.runTaskLater(SkyblockAGUI.getInstance(), 10);
     }

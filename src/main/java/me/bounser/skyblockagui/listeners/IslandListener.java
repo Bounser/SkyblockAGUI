@@ -5,46 +5,23 @@ import com.bgsoftware.superiorskyblock.api.events.IslandSchematicPasteEvent;
 import com.bgsoftware.superiorskyblock.api.events.PlayerChangeRoleEvent;
 import me.bounser.skyblockagui.tools.Data;
 import me.bounser.skyblockagui.tools.InstancesManager;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Chunk;
-import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class IslandListener implements Listener {
 
     @EventHandler
     public void onIslandSchematicPaste(IslandSchematicPasteEvent e){
 
-        Data data = Data.getInstance();
-        String type = data.getType(e.getLocation());
-        String schem = data.getSchematic(e.getIsland());
-
-        boolean persistant = false;
-        if(data.dynamicPlacing()) persistant = true;
-        // Load the chunks before placing the GUI.
-        for(Chunk c : e.getIsland().getAllChunks()){ if(!c.isLoaded()) c.load(); }
-        InstancesManager.getInstance().placeGUI(data.getLocation(e.getIsland(), type), data.getDirection(schem, type), data.getLayout(schem, type), persistant );
+        InstancesManager.getInstance().setupGUIs(e.getIsland(), Data.getInstance().dynamicPlacing());
     }
 
     // Removes GUI when disbanding the island.
     @EventHandler
     public void onIslandDisband(IslandDisbandEvent e){
-        Data data = Data.getInstance();
-        if(e.getIsland().getSchematicName() != data.getSchematic(e.getIsland())) return;
 
-        for(String type : new ArrayList<String>(Arrays.asList("overworld", "nether", "the_end")) ){
-            Location guiLoc = data.getLocation(e.getIsland(), type);
-            if(InstancesManager.getInstance().removeGUI(guiLoc)){
-                Bukkit.getLogger().info(ChatColor.GREEN + "GUI from " + e.getPlayer().getName() + "' island (type " + type + ") successfully removed.");
-            } else{
-                Bukkit.getLogger().info(ChatColor.RED + "GUI could not be removed from " + e.getPlayer().getName() + "' island (type " + type + ") (Is there none?)");
-            }
-        }
+        InstancesManager.getInstance().removeAllIslandGUIs(e.getIsland());
+
     }
 
     @EventHandler
@@ -53,5 +30,6 @@ public class IslandListener implements Listener {
         if(e.getNewRole().getPreviousRole() != null && (e.getNewRole().getWeight()) > e.getNewRole().getPreviousRole().getWeight())
         InstancesManager.getInstance().executeDynamicPlacement(e.getPlayer().asPlayer(), true);
         else InstancesManager.getInstance().executeDynamicRemoval(e.getPlayer().asPlayer().getLocation());
+
     }
 }

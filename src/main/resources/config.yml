@@ -2,7 +2,7 @@
 #
 Options:
   activation_radius: 6
-  # Use this option to change all the blocks behind the GUI every time the GUI is charged.
+  # Use this option to change all the blocks behind the GUI every time the GUI is loaded.
   replace_blocks:
     enabled: true
     material: STONE
@@ -11,6 +11,8 @@ Options:
   # Enables the dynamic placing. If you disable it, the plugin will only place the GUIs and they'll stay permanently.
   dynamicPlacing:
     enabled: false
+    # Delets all the GUIs from the islands in case you switch between non dynamic and dynamic placement.
+    force_delete: true
     # Modes available:
     # 1 = onIsland (Only summons the GUI if there's any member on the island (Ignoring visitors))
     # 2 = onIslandOwner (Only if the owner of the island is on the island)
@@ -18,13 +20,15 @@ Options:
     mode: 2
 
 
-# Information on the GUIs attributes and relative position
-#
-# Modify this values manually or with the command /setguilocation <Layout> (command recommended)
+# All the schematics that you will palce GUIs in.
 
 schematics:
   - "normal"
   - "desert"
+
+# Information on the GUIs attributes and relative position
+#
+# Modify this values manually or with the command /setguilocation <Layout> (command recommended)
 
 GUIs:
   # Schematic name

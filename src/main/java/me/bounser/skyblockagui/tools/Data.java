@@ -34,6 +34,8 @@ public class Data {
 
     public boolean dynamicPlacing(){ return main.getConfig().getBoolean("Options.dynamicPlacing.enabled"); }
 
+    public boolean forceDelete(){ return main.getConfig().getBoolean("Options.dynamicPlacing.force_remove"); }
+
     public int getMode(){ return main.getConfig().getInt("Options.dynamicPlacing.mode"); }
 
     public boolean getSetAir(){ return main.getConfig().getBoolean("Options.remove_screen_blocks"); }
@@ -55,6 +57,8 @@ public class Data {
     }
 
     // GETTERS
+
+    public boolean getEnabledGUI(String schem, String type){ return main.getConfig().getBoolean("GUIs." + schem + "." + type + ".enabled");}
 
     public int getRadius(){ return main.getConfig().getInt("Options.activation_radius"); }
 

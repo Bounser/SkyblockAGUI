@@ -1,6 +1,7 @@
 package me.bounser.skyblockagui.tools;
 
 import com.bgsoftware.superiorskyblock.api.island.Island;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
@@ -11,18 +12,20 @@ import org.bukkit.entity.ItemFrame;
 
 import java.util.Collection;
 
-public class SetupManager {
+public class SetupUtils {
 
-    private static SetupManager instance;
+    private static SetupUtils instance;
 
-    public static SetupManager getInstance(){
+    public static SetupUtils getInstance(){
         if(instance != null) return instance;
 
-        SetupManager.instance = new SetupManager();
+        SetupUtils.instance = new SetupUtils();
         return instance;
     }
 
     public void setupItemFrames(Island is, String type) {
+
+        Bukkit.broadcastMessage("setupitemframes");
 
         Data data = Data.getInstance();
         String schem = data.getSchematic(is);
@@ -67,11 +70,13 @@ public class SetupManager {
 
     private boolean checkForItemFrames(Collection<Entity> entities, Island is, String type){
 
+        Bukkit.broadcastMessage("checkforitemframes");
+
         Data data = Data.getInstance();
         String schem = data.getSchematic(is);
 
         for (Entity e : entities) {
-            if (e instanceof ItemFrame || e instanceof GlowItemFrame) {
+            if (e instanceof ItemFrame) {
                 switch (data.getDirection(schem, type).toString()) {
                     case "WEST": ((ItemFrame) e).setFacingDirection(BlockFace.WEST); break;
                     case "EAST": ((ItemFrame) e).setFacingDirection(BlockFace.EAST); break;
@@ -87,6 +92,8 @@ public class SetupManager {
     }
 
     public void clearArea(Island is, String type) {
+
+        Bukkit.broadcastMessage("cleararea");
 
         Data data = Data.getInstance();
 
@@ -119,6 +126,8 @@ public class SetupManager {
 
     public void setBackground (Island is, String type){
 
+        Bukkit.broadcastMessage("setbackground");
+
         Data data = Data.getInstance();
 
         Location loc = data.getLocation(is, type);
@@ -143,6 +152,8 @@ public class SetupManager {
             for (int j = 0; j < height; j++) {
 
                 loc.getBlock().setType(Material.valueOf("Material." + data.getMat()));
+                Bukkit.broadcastMessage(Material.STONE.toString());
+                Bukkit.broadcastMessage("Material." + data.getMat());
                 loc.add(0, +1, 0);
             }
 
