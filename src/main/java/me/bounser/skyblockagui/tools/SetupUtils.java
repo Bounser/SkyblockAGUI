@@ -25,8 +25,6 @@ public class SetupUtils {
 
     public void setupItemFrames(Island is, String type) {
 
-        Bukkit.broadcastMessage("setupitemframes");
-
         Data data = Data.getInstance();
         String schem = data.getSchematic(is);
         Location placingLoc = data.getPlacingLocation(is, type);
@@ -73,8 +71,6 @@ public class SetupUtils {
 
     private boolean checkForItemFrames(Collection<Entity> entities, Island is, String type){
 
-        Bukkit.broadcastMessage("checkforitemframes");
-
         Data data = Data.getInstance();
         String schem = data.getSchematic(is);
 
@@ -95,8 +91,6 @@ public class SetupUtils {
     }
 
     public void clearArea(Island is, String type) {
-
-        Bukkit.broadcastMessage("cleararea");
 
         Data data = Data.getInstance();
 
@@ -128,8 +122,6 @@ public class SetupUtils {
     }
 
     public void setBackground (Island is, String type){
-
-        Bukkit.broadcastMessage("setbackground");
 
         Data data = Data.getInstance();
 

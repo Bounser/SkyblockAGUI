@@ -28,14 +28,18 @@ public class RemoveGUIs implements CommandExecutor {
         }
 
         if(args[0].equalsIgnoreCase("confirm")){
+            int i = 0;
             for (GuiWallInstance gwi : GuiWallManager.getInstance().getActiveInstances()) {
                 for (String schem : Data.getInstance().getSchematics()) {
                     for (String type : new ArrayList<String>(Arrays.asList("overworld", "nether", "the_end"))) {
-                        if (gwi.getLayout().getName().equals(Data.getInstance().getLayout(schem, type)))
+                        if (gwi.getLayout().getName().equals(Data.getInstance().getLayout(schem, type))){
                             GuiWallManager.getInstance().unregisterInstance(gwi, true);
+                            i++;
+                        }
                     }
                 }
             }
+            sender.sendMessage(ChatColor.RED + "You deleted: " + i + " GUIs.");
         }
 
             return false;

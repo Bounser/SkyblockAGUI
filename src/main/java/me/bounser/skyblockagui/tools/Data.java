@@ -49,11 +49,6 @@ public class Data {
         save();
     }
 
-    public void setLayout(String LayoutName, String schem, String type){
-        main.getConfig().set("GUIs." + schem + "." + type + ".layout", LayoutName);
-        save();
-    }
-
     // GETTERS
 
     public boolean getEnabledGUI(String schem, String type){ return main.getConfig().getBoolean("GUIs." + schem + "." + type + ".enabled");}

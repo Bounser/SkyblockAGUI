@@ -34,7 +34,7 @@ GUIs:
     # Type of world in which the GUI settings will apply.
     overworld:
       # Place GUI? If its set to false no GUI will be placed.
-      enabled: false
+      enabled: true
       # Offset of the GUI from the center of the island.
       # Recommended to use the command /setguilocation <Layout>
       offset:
@@ -44,7 +44,7 @@ GUIs:
       # Orientation of the GUI. (Also recommended to use the command)
       facing: west
       # Layout that will be used.
-      layout: "GUIoverworld"
+      layout: "SuperiorGUI"
       # height of the layout
       height: 3
       # width of the layout
@@ -55,10 +55,10 @@ GUIs:
         x: 1
         y: 15
         z: 5
-        facing: north
-        layout: "GUInether"
-        height: 3
-        width: 2
+      facing: north
+      layout: "GUInether"
+      height: 3
+      width: 2
     the_end:
       enabled: false
       offset:

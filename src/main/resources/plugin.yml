@@ -8,3 +8,4 @@ description: Give your skyblock islands GUIs!
 commands:
   setguilocation:
   cancel:
+  removeguis:

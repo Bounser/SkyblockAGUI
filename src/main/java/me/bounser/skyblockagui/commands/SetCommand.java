@@ -30,7 +30,7 @@ public class SetCommand implements CommandExecutor {
 
             Data data = Data.getInstance();
 
-            data.setLayout(args[0], data.getSchemFromPlayer((Player) sender), data.getType(((Player) sender).getLocation()));
+            data.setValue(data.getSchemFromPlayer((Player) sender), data.getType(((Player) sender).getLocation()), "layout", args[0]);
 
         } else {
             System.out.printf("Command is not available for console.");

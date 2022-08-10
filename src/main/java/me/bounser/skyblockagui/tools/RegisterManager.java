@@ -117,7 +117,9 @@ public class RegisterManager {
 
         // Saving results.
         data.setValue(schem, type, "height", String.valueOf(height));
-        data.setValue(schem, type, "wide", String.valueOf(width));
+        data.setValue(schem, type, "width", String.valueOf(width));
+
+        data.setValue(schem, type, "enabled", "true");
 
         // Feedback.
         player.sendMessage(ChatColor.GREEN + "Second position set correctly");
