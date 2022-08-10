@@ -22,6 +22,10 @@ Options:
 #
 # Modify this values manually or with the command /setguilocation <Layout> (command recommended)
 
+schematics:
+  - "normal"
+  - "desert"
+
 GUIs:
   # Schematic name
   normal:

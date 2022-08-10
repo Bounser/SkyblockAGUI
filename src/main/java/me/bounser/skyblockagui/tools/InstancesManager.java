@@ -9,7 +9,9 @@ import me.leoko.advancedgui.utils.Direction;
 import me.leoko.advancedgui.utils.GuiLocation;
 import me.leoko.advancedgui.utils.GuiWallInstance;
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -20,15 +22,40 @@ public class InstancesManager {
     private static InstancesManager instance;
 
     public static InstancesManager getInstance(){
-        if(instance != null) return instance;
+        if(instance == null) instance = new InstancesManager();
 
-        InstancesManager.instance = new InstancesManager();
         return instance;
+    }
+
+    public void setupGUIs(Island is, Boolean persistant){
+
+        Data data = Data.getInstance();
+        String schem = data.getSchematic(is);
+
+        for(String type : new ArrayList<String>(Arrays.asList("overworld", "nether", "the_end")) ) {
+            Bukkit.broadcastMessage("2");
+
+            if((type.equals("nether") && is.isNetherEnabled()) || (type.equals("the_end") && is.isEndEnabled()) || type.equals("overworld")) {
+                Location guiLoc = data.getLocation(is, type);
+                if (!InstancesManager.getInstance().checkGUI(data.getLocation(is, type))) {
+                    for (Chunk c : is.getAllChunks(data.getEnviromentFromType(type))) {
+                        if (!c.isLoaded()) c.load();
+                        Bukkit.broadcastMessage("3");
+                    }
+                    InstancesManager.getInstance().placeGUI(
+                            data.getLocation(is, type),
+                            data.getDirection(schem, type),
+                            data.getLayout(schem, type),
+                            persistant);
+                }
+            }
+        }
     }
 
     // Method to place GUIs
     public void placeGUI(Location loc, Direction dir, String Layout, boolean persistant){
 
+        Bukkit.broadcastMessage("1");
         Data data = Data.getInstance();
 
         if(data.getSetAir()) SetupManager.getInstance().clearArea(SuperiorSkyblockAPI.getIslandAt(loc), data.getType(loc));
@@ -36,7 +63,6 @@ public class InstancesManager {
 
         SetupManager.getInstance().setupItemFrames(SuperiorSkyblockAPI.getIslandAt(loc), data.getType(loc));
 
-        if(GUIset(loc)) return;
         GuiWallManager.getInstance().registerInstance(
                 new GuiWallInstance(
                         GuiWallManager.getInstance().getNextId(),
@@ -45,27 +71,32 @@ public class InstancesManager {
         );
     }
 
-    // Method to remove GUIs
+    // Method to remove GUIs (Opposed of placeGUI)
     public boolean removeGUI(Location loc){
         GuiWallInstance gwi = InstancesManager.getInstance().getGUI(loc);
         if(gwi == null) return false;
+
         GuiWallManager.getInstance().unregisterInstance(gwi, true);
         return true;
     }
 
+    // Method to remove ALL GUIs (Opposed to setupGUIs)
     public void removeAllIslandGUIs(Island is){
         Data data = Data.getInstance();
         for(String type : new ArrayList<String>(Arrays.asList("overworld", "nether", "the_end")) ) {
-            Location guiLoc = data.getLocation(is, type);
-            if (InstancesManager.getInstance().GUIset(data.getLocation(is, type))) {
-                removeGUI(data.getLocation(is, type));
-                }
+
+            if((type.equals("nether") && is.isNetherEnabled()) || (type.equals("the_end") && is.isEndEnabled()) || type.equals("overworld")) {
+                Location guiLoc = data.getLocation(is, type);
+                if (InstancesManager.getInstance().checkGUI(data.getLocation(is, type)))
+                    removeGUI(data.getLocation(is, type));
             }
+
         }
+    }
 
     public GuiWallInstance getGUI(Location loc){ return GuiWallManager.getInstance().getActiveInstance(loc); }
 
-    public boolean GUIset(Location loc){ if(getGUI(loc) != null) return true; return false; }
+    public boolean checkGUI(Location loc){ if(getGUI(loc) != null) return true; return false; }
 
     public void executeDynamicRemoval(Location loc){
         Island is = SuperiorSkyblockAPI.getIslandAt(loc);
@@ -116,34 +147,29 @@ public class InstancesManager {
         Island is = null;
         if(at){ is = SuperiorSkyblockAPI.getIslandAt(player.getLocation()); }
         else { is = SuperiorSkyblockAPI.getPlayer(player).getIsland(); }
-        if(is == null) return;
-        Data data = Data.getInstance();
+        if((is != null) && Data.getInstance().getMode() != 3){
+            switch(Data.getInstance().getMode()) {
+                case 1:
+                    if (is.getIslandMembers().contains(player)) {
 
-        String type = data.getType(player.getLocation());
+                        InstancesManager.getInstance().setupGUIs(is, false);
+                        break;
+                    }
+                case 2:
+                    if (is.getOwner().getName().equals(player.getName())) {
 
-        if(InstancesManager.getInstance().GUIset(Data.getInstance().getLocation(is, type))) return;
-
-        switch(Data.getInstance().getMode()){
-            case 1: if(!GUIset(data.getLocation(is, type)) && is.getIslandMembers().contains(player)){
-
-                InstancesManager.getInstance().placeGUI(
-                        data.getLocation(is, type),
-                        data.getDirection(data.getSchematic(is), type),
-                        data.getLayout(data.getSchematic(is), type),
-                        false);
-                break;
+                        InstancesManager.getInstance().setupGUIs(is, false);
+                        break;
+                    }
             }
-            case 2: if(!GUIset(data.getLocation(is, type)) && is.getOwner().getName().equals(player.getName())){
-
-                InstancesManager.getInstance().placeGUI(
-                        data.getLocation(is, type),
-                        data.getDirection(data.getSchematic(is), type),
-                        data.getLayout(data.getSchematic(is), type),
-                        false);
-                break;
+        } else {
+            for(Island island : SuperiorSkyblockAPI.getGrid().getIslands())
+                if(island.isMember(SuperiorSkyblockAPI.getPlayer(player))){
+                    InstancesManager.getInstance().setupGUIs(island, false);
+                }
             }
         }
-    }
+
 
     public void checkForPlayers(){
         for(Player p : Bukkit.getServer().getOnlinePlayers()){

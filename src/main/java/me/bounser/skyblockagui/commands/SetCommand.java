@@ -15,7 +15,7 @@ public class SetCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if(sender instanceof Player){
-            if(RegisterManager.getInstance().isRegistering((Player) sender, "Both")){
+            if(RegisterManager.getInstance().isRegistering((Player) sender, "checkBoth")){
                 sender.sendMessage(ChatColor.RED + "You are already placing a GUI! cancel with /cancel"); return false;
             }
             if(SuperiorSkyblockAPI.getIslandAt(((Player) sender).getLocation())==null){
@@ -29,7 +29,8 @@ public class SetCommand implements CommandExecutor {
             RegisterManager.getInstance().setPlayerFirstRegister((Player) sender);
 
             Data data = Data.getInstance();
-            data.setLayout(args[0], data.getType(((Player) sender).getLocation()), data.getSchemFromPlayer((Player) sender));
+
+            data.setLayout(args[0], data.getSchemFromPlayer((Player) sender), data.getType(((Player) sender).getLocation()));
 
         } else {
             System.out.printf("Command is not available for console.");

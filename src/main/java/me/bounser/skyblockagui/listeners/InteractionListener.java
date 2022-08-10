@@ -16,13 +16,12 @@ public class InteractionListener implements Listener {
 
         Entity entity = e.getRightClicked();
         Player p = e.getPlayer();
+        RegisterManager regist = RegisterManager.getInstance();
 
         if((entity.getType() != EntityType.ITEM_FRAME &&
             entity.getType() != EntityType.GLOW_ITEM_FRAME) ||
-           SuperiorSkyblockAPI.getIslandAt(entity.getLocation()) != null ||
-           !RegisterManager.getInstance().isRegistering(p, "both")) return;
-
-        RegisterManager regist = RegisterManager.getInstance();
+           SuperiorSkyblockAPI.getIslandAt(entity.getLocation()) == null ||
+           !regist.isRegistering(p, "checkBoth")) return;
 
         if(regist.isRegistering(p, "first")){
 
@@ -31,6 +30,7 @@ public class InteractionListener implements Listener {
         } else if(regist.isRegistering(p, "second")){
 
             regist.saveSecondPosition(p, entity);
+
         }
     }
 }

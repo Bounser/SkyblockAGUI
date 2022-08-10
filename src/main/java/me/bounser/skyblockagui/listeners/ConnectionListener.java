@@ -23,27 +23,15 @@ public class ConnectionListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
-        if(Data.getInstance().getMode() == 3 && SuperiorSkyblockAPI.getPlayer(e.getPlayer()).hasIsland()){
 
-            Island is = SuperiorSkyblockAPI.getPlayer(e.getPlayer()).getIsland();
-            Data data = Data.getInstance();
-            String schem = data.getSchematic(is);
+        if(Data.getInstance().dynamicPlacing()) InstancesManager.getInstance().executeDynamicPlacement(e.getPlayer(), false);
 
-            for(String type : new ArrayList<String>(Arrays.asList("overworld", "nether", "the_end")) ) {
-                Location guiLoc = data.getLocation(is, type);
-                if (!InstancesManager.getInstance().GUIset(data.getLocation(is, type))) {
-                    for (Chunk c : is.getAllChunks()) { if (!c.isLoaded()) c.load(); }
-                    InstancesManager.getInstance().placeGUI(data.getLocation(is, type), data.getDirection(schem, type), data.getLayout(schem, type), false);
-                }
-            }
-        }
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e){
 
-        if(Data.getInstance().dynamicPlacing())
-        InstancesManager.getInstance().executeDynamicRemoval(e.getPlayer().getLocation());
+        if(Data.getInstance().dynamicPlacing()) InstancesManager.getInstance().executeDynamicRemoval(e.getPlayer().getLocation());
 
     }
 }

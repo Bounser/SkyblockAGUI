@@ -32,7 +32,11 @@ public class CancelCommand implements CommandExecutor {
 
             }
         }
-        sender.sendMessage(ChatColor.RED +"You are no longer registering the "+ ChatColor.GREEN + phase + ChatColor.RED +" position.");
+        if(phase == null) {
+            sender.sendMessage(ChatColor.BLUE + "There's nothing to cancel."); }
+        else {
+            sender.sendMessage(ChatColor.RED +"You are no longer registering the "+ ChatColor.GREEN + phase + ChatColor.RED +" position.");
+        }
 
         return false;
     }

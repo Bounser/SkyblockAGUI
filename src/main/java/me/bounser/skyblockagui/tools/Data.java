@@ -17,6 +17,8 @@ public class Data {
 
     private Data(){
         main = SkyblockAGUI.getInstance();
+        main.getConfig().options().copyDefaults();
+        main.saveDefaultConfig();
     }
 
     public static Data getInstance(){
@@ -44,11 +46,12 @@ public class Data {
 
     public void setValue(String schem, String type, String path, String value){
         main.getConfig().set("GUIs." + schem + "." + type + "." + path, value);
+        save();
     }
 
-    public void setLayout(String LayoutName, String type, String schem){
-        main.getConfig().set("GUIs." + schem + "." + type + ".", LayoutName);
-        main.saveConfig();
+    public void setLayout(String LayoutName, String schem, String type){
+        main.getConfig().set("GUIs." + schem + "." + type + ".layout", LayoutName);
+        save();
     }
 
     // GETTERS
@@ -57,7 +60,7 @@ public class Data {
 
     public String getFacing(String schem, String type){ return main.getConfig().getString("GUIs." + schem + "." + type + ".facing"); }
 
-    public List<String> getSchematics(){ return (List<String>) main.getConfig().getList("Setup"); }
+    public List<String> getSchematics(){ return (List<String>) main.getConfig().getList("schematics"); }
 
     public String getSchematic(Island is){
         for(String schem : getSchematics()){
@@ -91,11 +94,12 @@ public class Data {
 
     static public World.Environment getEnviromentFromType(String type) {
 
-        World.Environment environment = World.Environment.NORMAL;
-
-        if (type == "nether") environment = World.Environment.NETHER;
-        if (type == "the_end") environment = World.Environment.THE_END;
-
+        World.Environment environment = null;
+        switch(type){
+            case "overworld": environment = World.Environment.NORMAL; break;
+            case "nether": environment = World.Environment.NETHER; break;
+            case "the_end": environment =World.Environment.THE_END; break;
+        }
         return environment;
     }
 

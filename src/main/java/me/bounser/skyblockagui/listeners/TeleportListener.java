@@ -12,6 +12,6 @@ public class TeleportListener implements Listener {
     public void onTeleport(PlayerTeleportEvent e){
         if(SuperiorSkyblockAPI.getIslandAt(e.getFrom()) == null) InstancesManager.getInstance().executeDynamicRemoval(e.getFrom());
 
-        if(SuperiorSkyblockAPI.getIslandAt(e.getTo()) != null) InstancesManager.getInstance().executeDynamicPlacement(e.getPlayer(), true);
+        if(SuperiorSkyblockAPI.getIslandAt(e.getTo()) != null) InstancesManager.getInstance().executeDynamicRemoval(e.getTo());
     }
 }
