@@ -1,24 +1,25 @@
 # General options.
 #
 Options:
+  # Change the radius from the GUIs placed in the islands. (Not recommended to use big values (>8))
   activation_radius: 6
   # Use this option to change all the blocks behind the GUI every time the GUI is loaded.
   replace_blocks:
     enabled: true
     material: STONE
-  # Every time the GUI is loaded it will remove every block (And residual itemframe) that is in the screen (E.g. in case the player pushes a block with a piston)
+  # Every time the GUI is loaded it will remove every block (And residual frames) that is in the screen (E.g. in case the player pushes a block with a piston)
   remove_screen_blocks: true
   # Enables the dynamic placing. If you disable it, the plugin will only place the GUIs and they'll stay permanently.
   dynamicPlacing:
     enabled: false
     # Modes available:
-    # 1 = onIsland (Only summons the GUI if there's any member on the island (Ignoring visitors))
-    # 2 = onIslandOwner (Only if the owner of the island is on the island)
-    # 3 = onOnline (Places the GUI if a member of the island is online)
+    # 0 = Places the GUI if anyone is on the island.
+    # 1 = Only summons the GUI if there's any member on the island (Ignoring visitors)
+    # 2 = Only if the owner of the island is on the island
+    # 3 = Places the GUI if a member of the island is online
     mode: 2
 
-
-# All the schematics that you will palce GUIs in.
+# All the schematics in which you will place GUIs
 
 schematics:
   - "normal"

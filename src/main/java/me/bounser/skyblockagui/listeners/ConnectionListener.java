@@ -1,6 +1,5 @@
 package me.bounser.skyblockagui.listeners;
 
-import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
 import me.bounser.skyblockagui.SkyblockAGUI;
 import me.bounser.skyblockagui.tools.Data;
 import me.bounser.skyblockagui.tools.InstancesManager;

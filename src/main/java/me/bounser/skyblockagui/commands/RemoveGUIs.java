@@ -5,7 +5,6 @@ import me.bounser.skyblockagui.tools.Data;
 import me.bounser.skyblockagui.tools.SetupUtils;
 import me.leoko.advancedgui.manager.GuiWallManager;
 import me.leoko.advancedgui.utils.GuiWallInstance;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -13,7 +12,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class RemoveGUIs implements CommandExecutor {
@@ -31,6 +29,10 @@ public class RemoveGUIs implements CommandExecutor {
         if(args.length == 1 && args[0].equalsIgnoreCase("confirm")){
             Data data = Data.getInstance();
             int i = 0;
+            if(GuiWallManager.getInstance().getActiveInstances().size() == 0) {
+                sender.sendMessage(ChatColor.RED + "There is no GUIs to remove!");
+                return false;
+            }
             for (GuiWallInstance gwi : GuiWallManager.getInstance().getActiveInstances()) {
                 for (String schem : data.getSchematics()) {
                     for (String type : Arrays.asList("overworld", "nether", "the_end")) {
@@ -47,7 +49,7 @@ public class RemoveGUIs implements CommandExecutor {
             }
             sender.sendMessage(ChatColor.RED + "You deleted: " + i + " GUI(s).");
         } else {
-            sender.sendMessage(ChatColor.RED + "This action will delete ALL island GUIs. If you are sure execute: /removeguis confirm");
+            sender.sendMessage(ChatColor.RED + "This action will delete ALL island's GUIs. If you are sure execute: /removeguis confirm");
         }
         return false;
     }

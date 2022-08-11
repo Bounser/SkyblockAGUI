@@ -4,7 +4,6 @@ import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
 import com.bgsoftware.superiorskyblock.api.island.Island;
 import me.bounser.skyblockagui.SkyblockAGUI;
 import me.leoko.advancedgui.utils.Direction;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -31,6 +30,8 @@ public class Data {
 
     public void save(){ main.saveConfig(); }
 
+    public void reload(){ main.reloadConfig(); }
+
     // OPTIONS
 
     public boolean dynamicPlacing(){ return main.getConfig().getBoolean("Options.dynamicPlacing.enabled"); }
@@ -46,12 +47,20 @@ public class Data {
     // SETTERS
 
     public void setValue(String schem, String type, String path, int value){
+        reload();
         main.getConfig().set("GUIs." + schem + "." + type + "." + path, value);
         save();
     }
 
-    public void setString(String schem, String type, String path, String value){
-        main.getConfig().set("GUIs." + schem + "." + type + "." + path, value);
+    public void setString(String schem, String type, String path, String str){
+        reload();
+        main.getConfig().set("GUIs." + schem + "." + type + "." + path, str);
+        save();
+    }
+
+    public void setBoolean(String schem, String type, boolean b){
+        reload();
+        main.getConfig().set("GUIs." + schem + "." + type + ".enabled", b);
         save();
     }
 

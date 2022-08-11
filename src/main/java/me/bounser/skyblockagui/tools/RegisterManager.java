@@ -3,7 +3,6 @@ package me.bounser.skyblockagui.tools;
 import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
 import com.bgsoftware.superiorskyblock.api.island.Island;
 import me.bounser.skyblockagui.SkyblockAGUI;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -12,7 +11,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import static java.lang.Math.abs;
 
@@ -110,7 +108,7 @@ public class RegisterManager {
         data.setValue(schem, type, "height", height);
         data.setValue(schem, type, "width", width);
 
-        data.setString(schem, type, "enabled", "true");
+        data.setBoolean(schem, type, true);
 
         // Feedback.
         player.sendMessage(ChatColor.GREEN + "Second position set correctly");

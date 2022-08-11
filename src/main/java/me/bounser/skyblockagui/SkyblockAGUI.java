@@ -40,9 +40,10 @@ public final class SkyblockAGUI extends JavaPlugin {
             Bukkit.getLogger().info("Dynamic placing module loaded.");
         }
 
-        // REGISTRATION
+        // Registration
         Bukkit.getPluginManager().registerEvents(new InteractionListener(), this);
 
+        // Commands
         getCommand("setguilocation").setExecutor(new SetCommand());
         getCommand("cancel").setExecutor(new CancelCommand());
         getCommand("removeguis").setExecutor(new RemoveGUIs());

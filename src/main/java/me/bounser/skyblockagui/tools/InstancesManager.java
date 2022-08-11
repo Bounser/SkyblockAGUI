@@ -34,19 +34,16 @@ public class InstancesManager {
 
         for(String type : Arrays.asList("overworld", "nether", "the_end") ) {
 
-            Bukkit.broadcastMessage(String.valueOf(is.isNetherEnabled()));
-            Bukkit.broadcastMessage(String.valueOf(is.isEndEnabled()));
-
             if(((type.equals("nether") && is.isNetherEnabled()) ||
                (type.equals("the_end") && is.isEndEnabled()) ||
                 type.equals("overworld")) &&
                 data.getEnabledGUI(schem, type)) {
 
                 if (!InstancesManager.getInstance().checkGUI(data.getPlacingLocation(is, type))) {
+
                     for (Chunk c : is.getAllChunks(data.getEnviromentFromType(type))) {
                         if (!c.isLoaded()) c.load();
                     }
-                    Bukkit.broadcastMessage("Puesto " + type);
                     InstancesManager.getInstance().placeGUI(
                             data.getPlacingLocation(is, type),
                             data.getDirection(schem, type),
