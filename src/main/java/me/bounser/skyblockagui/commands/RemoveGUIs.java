@@ -3,6 +3,7 @@ package me.bounser.skyblockagui.commands;
 import me.bounser.skyblockagui.tools.Data;
 import me.leoko.advancedgui.manager.GuiWallManager;
 import me.leoko.advancedgui.utils.GuiWallInstance;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -25,6 +26,7 @@ public class RemoveGUIs implements CommandExecutor {
         }
         if(args.length != 1){
             sender.sendMessage(ChatColor.RED + "This action will delete ALL island GUIs. If you are sure execute: /removeguis confirm");
+            return false;
         }
 
         if(args[0].equalsIgnoreCase("confirm")){
@@ -33,6 +35,7 @@ public class RemoveGUIs implements CommandExecutor {
                 for (String schem : Data.getInstance().getSchematics()) {
                     for (String type : new ArrayList<String>(Arrays.asList("overworld", "nether", "the_end"))) {
                         if (gwi.getLayout().getName().equals(Data.getInstance().getLayout(schem, type))){
+                            Bukkit.broadcastMessage(gwi.getLocation().getDirection().toString());
                             GuiWallManager.getInstance().unregisterInstance(gwi, true);
                             i++;
                         }

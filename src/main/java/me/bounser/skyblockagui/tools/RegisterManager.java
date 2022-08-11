@@ -3,6 +3,7 @@ package me.bounser.skyblockagui.tools;
 import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
 import com.bgsoftware.superiorskyblock.api.island.Island;
 import me.bounser.skyblockagui.SkyblockAGUI;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -58,22 +59,19 @@ public class RegisterManager {
         Location center = data.getCenterLocation(is, type);
         Location interact = entity.getLocation();
 
-        // Offset center-first position
-        int[] offset = new int[3];
-        offset[0] = interact.getBlockX() - center.getBlockX();
-        offset[1] = interact.getBlockY() - center.getBlockY();
-        offset[2] = interact.getBlockZ() - center.getBlockZ();
-        // Saves values.
-        data.setValue(schem, type, "offset.x", String.valueOf(offset[0]));
-        data.setValue(schem, type, "offset.y", String.valueOf(offset[1]));
-        data.setValue(schem, type, "offset.z", String.valueOf(offset[2]));
+        // Gets offset
+        data.setValue(schem, type, "offset.x", interact.getBlockX() - center.getBlockX());
+        data.setValue(schem, type, "offset.y", interact.getBlockY() - center.getBlockY());
+        data.setValue(schem, type, "offset.z", interact.getBlockZ() - center.getBlockZ());
+
+        Bukkit.broadcastMessage(String.valueOf(interact.getBlockX() - center.getBlockX()));
 
         // Gets the direction from the entity.
         switch(entity.getFacing().toString()){
-            case "EAST": data.setValue(schem, type, "facing", "EAST");
-            case "WEAST": data.setValue(schem, type, "facing", "WEAST");
-            case "BNORTH": data.setValue(schem, type, "facing", "NORTH");
-            case "SOUTH": data.setValue(schem, type, "facing", "SOUTH");
+            case "EAST": data.setString(schem, type, "facing", "EAST");
+            case "WEAST": data.setString(schem, type, "facing", "WEAST");
+            case "BNORTH": data.setString(schem, type, "facing", "NORTH");
+            case "SOUTH": data.setString(schem, type, "facing", "SOUTH");
         }
 
         // Feedback
@@ -99,11 +97,7 @@ public class RegisterManager {
         String type = data.getType(entity.getLocation());
 
         // Getting the first entity position.
-        Location first = data.getPlacingLocation(is, type).add(
-                data.getOffset(schem, type)[0],
-                data.getOffset(schem, type)[1],
-                data.getOffset(schem, type)[2]
-        );
+        Location first = data.getPlacingLocation(is, type);
 
         // Calculating the difference between the first and second position.
         int height = first.getBlockY() - second.getBlockY() +1;
@@ -116,10 +110,10 @@ public class RegisterManager {
         }
 
         // Saving results.
-        data.setValue(schem, type, "height", String.valueOf(height));
-        data.setValue(schem, type, "width", String.valueOf(width));
+        data.setValue(schem, type, "height", height);
+        data.setValue(schem, type, "width", width);
 
-        data.setValue(schem, type, "enabled", "true");
+        data.setString(schem, type, "enabled", "true");
 
         // Feedback.
         player.sendMessage(ChatColor.GREEN + "Second position set correctly");

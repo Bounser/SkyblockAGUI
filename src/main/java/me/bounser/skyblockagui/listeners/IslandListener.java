@@ -18,7 +18,7 @@ public class IslandListener implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                InstancesManager.getInstance().setupGUIs(e.getIsland(), Data.getInstance().dynamicPlacing());
+                InstancesManager.getInstance().setupGUIs(e.getIsland());
             }
         }.runTaskLater(SkyblockAGUI.getInstance(), 5);
     }

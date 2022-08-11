@@ -16,8 +16,8 @@ public class SetupUtils {
 
     private static SetupUtils instance;
 
-    public static SetupUtils getInstance(){
-        if(instance != null) return instance;
+    public static SetupUtils getInstance() {
+        if (instance != null) return instance;
 
         SetupUtils.instance = new SetupUtils();
         return instance;
@@ -32,7 +32,7 @@ public class SetupUtils {
         int width = data.getWidth(schem, type);
         int height = data.getHeight(schem, type);
 
-        placingLoc.add(0,+1,0);
+        placingLoc.add(0, +1, 0);
 
         for (int i = 0; i < width; i++) {
 
@@ -40,12 +40,12 @@ public class SetupUtils {
 
             for (int j = 0; j < height; j++) {
 
-                if (!checkForItemFrames(placingLoc.getWorld().getNearbyEntities(placingLoc.add(0,+0.2,0),0.5,0.1,0.5), is, type)){
+                if (!checkForItemFrames(placingLoc.getWorld().getNearbyEntities(placingLoc.add(0, +0.2, 0), 0.5, 0.1, 0.5), is, type)) {
 
-                    GlowItemFrame itemFrame = (GlowItemFrame) placingLoc.getWorld().spawnEntity(placingLoc.add(0,-0.2,0), EntityType.GLOW_ITEM_FRAME);
+                    GlowItemFrame itemFrame = (GlowItemFrame) placingLoc.getWorld().spawnEntity(placingLoc.add(0, -0.2, 0), EntityType.GLOW_ITEM_FRAME);
                     itemFrame.setVisible(false);
 
-                } else placingLoc.add(0,-0.2,0);
+                } else placingLoc.add(0, -0.2, 0);
 
                 placingLoc.add(0, +1, 0);
             }
@@ -69,7 +69,7 @@ public class SetupUtils {
         }
     }
 
-    private boolean checkForItemFrames(Collection<Entity> entities, Island is, String type){
+    private boolean checkForItemFrames(Collection<Entity> entities, Island is, String type) {
 
         Data data = Data.getInstance();
         String schem = data.getSchematic(is);
@@ -77,10 +77,18 @@ public class SetupUtils {
         for (Entity e : entities) {
             if (e instanceof ItemFrame) {
                 switch (data.getDirection(schem, type).toString()) {
-                    case "WEST": ((ItemFrame) e).setFacingDirection(BlockFace.WEST); break;
-                    case "EAST": ((ItemFrame) e).setFacingDirection(BlockFace.EAST); break;
-                    case "NORTH": ((ItemFrame) e).setFacingDirection(BlockFace.NORTH); break;
-                    case "SOUTH": ((ItemFrame) e).setFacingDirection(BlockFace.SOUTH); break;
+                    case "WEST":
+                        ((ItemFrame) e).setFacingDirection(BlockFace.WEST);
+                        break;
+                    case "EAST":
+                        ((ItemFrame) e).setFacingDirection(BlockFace.EAST);
+                        break;
+                    case "NORTH":
+                        ((ItemFrame) e).setFacingDirection(BlockFace.NORTH);
+                        break;
+                    case "SOUTH":
+                        ((ItemFrame) e).setFacingDirection(BlockFace.SOUTH);
+                        break;
                 }
 
                 ((ItemFrame) e).setVisible(false);
@@ -113,15 +121,23 @@ public class SetupUtils {
             }
 
             switch (data.getDirection(schem, type).toString()) {
-                case "WEST": loc.add(0, 0, +1); break;
-                case "EAST": loc.add(0, 0, -1); break;
-                case "NORTH": loc.add(-1, 0, 0); break;
-                case "SOUTH": loc.add(+1, 0, 0); break;
+                case "WEST":
+                    loc.add(0, 0, +1);
+                    break;
+                case "EAST":
+                    loc.add(0, 0, -1);
+                    break;
+                case "NORTH":
+                    loc.add(-1, 0, 0);
+                    break;
+                case "SOUTH":
+                    loc.add(+1, 0, 0);
+                    break;
             }
         }
     }
 
-    public void setBackground (Island is, String type){
+    public void setBackground(Island is, String type) {
 
         Data data = Data.getInstance();
 
@@ -134,10 +150,18 @@ public class SetupUtils {
         loc.add(0, +1, 0);
 
         switch (data.getDirection(schem, type).toString()) {
-            case "WEST": loc.add(1, 0, 0); break;
-            case "EAST": loc.add(-1, 0, 0); break;
-            case "NORTH": loc.add(0, 0, 1); break;
-            case "SOUTH": loc.add(0, 0, -1); break;
+            case "WEST":
+                loc.add(1, 0, 0);
+                break;
+            case "EAST":
+                loc.add(-1, 0, 0);
+                break;
+            case "NORTH":
+                loc.add(0, 0, 1);
+                break;
+            case "SOUTH":
+                loc.add(0, 0, -1);
+                break;
         }
 
         for (int i = 0; i < width; i++) {
@@ -151,10 +175,62 @@ public class SetupUtils {
             }
 
             switch (data.getDirection(schem, type).toString()) {
-                case "WEST": loc.add(0, 0, +1); break;
-                case "EAST": loc.add(0, 0, -1); break;
-                case "NORTH": loc.add(-1, 0, 0); break;
-                case "SOUTH": loc.add(+1, 0, 0); break;
+                case "WEST":
+                    loc.add(0, 0, +1);
+                    break;
+                case "EAST":
+                    loc.add(0, 0, -1);
+                    break;
+                case "NORTH":
+                    loc.add(-1, 0, 0);
+                    break;
+                case "SOUTH":
+                    loc.add(+1, 0, 0);
+                    break;
+            }
+        }
+    }
+
+    public void removeItemFrames(Island is, String type) {
+
+        Data data = Data.getInstance();
+        String schem = data.getSchematic(is);
+        Location placingLoc = data.getPlacingLocation(is, type);
+
+        int width = data.getWidth(schem, type);
+        int height = data.getHeight(schem, type);
+
+        placingLoc.add(0, +1, 0);
+
+        for (int i = 0; i < width; i++) {
+
+            placingLoc.add(0, -height, 0);
+
+            for (int j = 0; j < height; j++) {
+
+                for (Entity entity : placingLoc.getWorld().getNearbyEntities(placingLoc.add(0, +0.2, 0), 0.5, 0.1, 0.5)) {
+
+                    entity.remove();
+
+                    placingLoc.add(0, +1, 0);
+                }
+
+                Bukkit.broadcastMessage(data.getPlacingLocation(is, type).toString());
+
+                switch (data.getDirection(schem, type).toString()) {
+                    case "WEST":
+                        placingLoc.add(0, 0, +1);
+                        break;
+                    case "EAST":
+                        placingLoc.add(0, 0, -1);
+                        break;
+                    case "NORTH":
+                        placingLoc.add(-1, 0, 0);
+                        break;
+                    case "SOUTH":
+                        placingLoc.add(+1, 0, 0);
+                        break;
+                }
             }
         }
     }

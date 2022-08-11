@@ -12,7 +12,7 @@ public class ConnectionListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
 
-        if(Data.getInstance().dynamicPlacing()) InstancesManager.getInstance().executeDynamicPlacement(e.getPlayer(), !Data.getInstance().dynamicPlacing());
+        if(Data.getInstance().dynamicPlacing()) InstancesManager.getInstance().executeDynamicPlacement(e.getPlayer(), true);
 
     }
 

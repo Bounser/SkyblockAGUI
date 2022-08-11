@@ -4,6 +4,7 @@ import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
 import com.bgsoftware.superiorskyblock.api.island.Island;
 import me.bounser.skyblockagui.SkyblockAGUI;
 import me.leoko.advancedgui.utils.Direction;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -44,7 +45,12 @@ public class Data {
 
     // SETTERS
 
-    public void setValue(String schem, String type, String path, String value){
+    public void setValue(String schem, String type, String path, int value){
+        main.getConfig().set("GUIs." + schem + "." + type + "." + path, value);
+        save();
+    }
+
+    public void setString(String schem, String type, String path, String value){
         main.getConfig().set("GUIs." + schem + "." + type + "." + path, value);
         save();
     }
@@ -68,13 +74,9 @@ public class Data {
 
     public String getSchemFromPlayer(Player player){ return SuperiorSkyblockAPI.getIslandAt(player.getLocation()).getSchematicName(); }
 
-    public int[] getOffset(String schem, String type){
-        int i[] = new int[3];
-        i[0] = main.getConfig().getInt("GUIs." + schem + "." + type + ".offset.x");
-        i[1] = main.getConfig().getInt("GUIs." + schem + "." + type + ".offset.y");
-        i[2] = main.getConfig().getInt("GUIs." + schem + "." + type + ".offset.z");
-        return i;
-    }
+    public int getOffsetX(String schem, String type){ return main.getConfig().getInt("GUIs." + schem + "." + type + ".offset.x"); }
+    public int getOffsetY(String schem, String type){ return main.getConfig().getInt("GUIs." + schem + "." + type + ".offset.y"); }
+    public int getOffsetZ(String schem, String type){ return main.getConfig().getInt("GUIs." + schem + "." + type + ".offset.z"); }
 
     public Direction getDirection(String schem, String type){
         Direction direction = null;
@@ -115,7 +117,7 @@ public class Data {
 
     public Location getPlacingLocation(Island island, String type) {
         String schem = island.getSchematicName();
-        return getCenterLocation(island, type).add(getOffset(schem, type)[0],getOffset(schem, type)[1],getOffset(schem, type)[2]);
+        return getCenterLocation(island, type).add(getOffsetZ(schem, type),getOffsetY(schem, type),getOffsetZ(schem, type));
     }
 
     public Location getCenterLocation(Island is, String type) {
