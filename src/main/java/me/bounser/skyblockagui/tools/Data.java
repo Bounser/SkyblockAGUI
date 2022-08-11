@@ -97,7 +97,7 @@ public class Data {
         switch(type){
             case "overworld": environment = World.Environment.NORMAL; break;
             case "nether": environment = World.Environment.NETHER; break;
-            case "the_end": environment =World.Environment.THE_END; break;
+            case "the_end": environment = World.Environment.THE_END; break;
         }
         return environment;
     }
@@ -117,7 +117,7 @@ public class Data {
 
     public Location getPlacingLocation(Island island, String type) {
         String schem = island.getSchematicName();
-        return getCenterLocation(island, type).add(getOffsetZ(schem, type),getOffsetY(schem, type),getOffsetZ(schem, type));
+        return getCenterLocation(island, type).add(getOffsetX(schem, type),getOffsetY(schem, type),getOffsetZ(schem, type));
     }
 
     public Location getCenterLocation(Island is, String type) {

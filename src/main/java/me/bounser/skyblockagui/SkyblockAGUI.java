@@ -37,7 +37,6 @@ public final class SkyblockAGUI extends JavaPlugin {
             // Creates GUIs in case there is any player online (Forcing reload)
             InstancesManager.getInstance().checkForPlayers();
 
-            Bukkit.broadcastMessage("Loaded dynamic");
             Bukkit.getLogger().info("Dynamic placing module loaded.");
         }
 

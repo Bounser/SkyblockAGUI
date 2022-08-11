@@ -12,6 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static java.lang.Math.abs;
 
@@ -64,15 +65,8 @@ public class RegisterManager {
         data.setValue(schem, type, "offset.y", interact.getBlockY() - center.getBlockY());
         data.setValue(schem, type, "offset.z", interact.getBlockZ() - center.getBlockZ());
 
-        Bukkit.broadcastMessage(String.valueOf(interact.getBlockX() - center.getBlockX()));
-
         // Gets the direction from the entity.
-        switch(entity.getFacing().toString()){
-            case "EAST": data.setString(schem, type, "facing", "EAST");
-            case "WEAST": data.setString(schem, type, "facing", "WEAST");
-            case "BNORTH": data.setString(schem, type, "facing", "NORTH");
-            case "SOUTH": data.setString(schem, type, "facing", "SOUTH");
-        }
+        data.setString(schem, type, "facing", entity.getFacing().toString().toLowerCase());
 
         // Feedback
         removeRegister(player, "first");
@@ -99,9 +93,12 @@ public class RegisterManager {
         // Getting the first entity position.
         Location first = data.getPlacingLocation(is, type);
 
+        if(!type.equals(data.getType(first))) return;
+
         // Calculating the difference between the first and second position.
         int height = first.getBlockY() - second.getBlockY() +1;
         int width;
+        Bukkit.broadcastMessage(data.getFacing(schem,type));
         if (data.getFacing(schem, type).equalsIgnoreCase("west") ||
             data.getFacing(schem, type).equalsIgnoreCase("east")) {
             width = abs(abs(first.getBlockZ()) - abs(second.getBlockZ())) +1;

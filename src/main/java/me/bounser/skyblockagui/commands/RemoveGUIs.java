@@ -1,10 +1,13 @@
 package me.bounser.skyblockagui.commands;
 
+import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
 import me.bounser.skyblockagui.tools.Data;
+import me.bounser.skyblockagui.tools.SetupUtils;
 import me.leoko.advancedgui.manager.GuiWallManager;
 import me.leoko.advancedgui.utils.GuiWallInstance;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -30,22 +33,25 @@ public class RemoveGUIs implements CommandExecutor {
         }
 
         if(args[0].equalsIgnoreCase("confirm")){
+            Data data = Data.getInstance();
             int i = 0;
             for (GuiWallInstance gwi : GuiWallManager.getInstance().getActiveInstances()) {
-                for (String schem : Data.getInstance().getSchematics()) {
+                for (String schem : data.getSchematics()) {
                     for (String type : new ArrayList<String>(Arrays.asList("overworld", "nether", "the_end"))) {
-                        if (gwi.getLayout().getName().equals(Data.getInstance().getLayout(schem, type))){
-                            Bukkit.broadcastMessage(gwi.getLocation().getDirection().toString());
+                        Location loc = new Location(gwi.getLocation().getWorld(), gwi.getLocation().getX(), gwi.getLocation().getY(), gwi.getLocation().getZ());
+                        if (data.getSchematic(SuperiorSkyblockAPI.getIslandAt(loc)) == schem &&
+                                gwi.getLayout().getName().equals(Data.getInstance().getLayout(schem, type))){
+
+                            SetupUtils.getInstance().clearArea(SuperiorSkyblockAPI.getIslandAt(loc), data.getType(loc));
                             GuiWallManager.getInstance().unregisterInstance(gwi, true);
                             i++;
                         }
                     }
                 }
             }
-            sender.sendMessage(ChatColor.RED + "You deleted: " + i + " GUIs.");
-        }
-
+            sender.sendMessage(ChatColor.RED + "You deleted: " + i + " GUI(s).");
             return false;
-
+        }
+        return false;
     }
 }
