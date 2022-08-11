@@ -91,7 +91,7 @@ public class Data {
         return main.getConfig().getString("GUIs." + schem + "." + type + ".layout");
     }
 
-    static public World.Environment getEnviromentFromType(String type) {
+    public World.Environment getEnviromentFromType(String type) {
 
         World.Environment environment = null;
         switch(type){
@@ -123,6 +123,6 @@ public class Data {
     public Location getCenterLocation(Island is, String type) {
         if(is == null) return null;
 
-        return is.getCenter(Data.getEnviromentFromType(type));
+        return is.getCenter(getEnviromentFromType(type));
     }
 }

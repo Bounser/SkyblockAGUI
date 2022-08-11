@@ -4,7 +4,6 @@ import com.bgsoftware.superiorskyblock.api.events.IslandDisbandEvent;
 import com.bgsoftware.superiorskyblock.api.events.IslandSchematicPasteEvent;
 import com.bgsoftware.superiorskyblock.api.events.PlayerChangeRoleEvent;
 import me.bounser.skyblockagui.SkyblockAGUI;
-import me.bounser.skyblockagui.tools.Data;
 import me.bounser.skyblockagui.tools.InstancesManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

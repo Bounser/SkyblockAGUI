@@ -7,7 +7,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CancelCommand implements CommandExecutor {
@@ -23,7 +22,7 @@ public class CancelCommand implements CommandExecutor {
 
         String phase = null;
 
-        for(String auxPhase  : new ArrayList<String>(Arrays.asList("first", "second")) ){
+        for(String auxPhase  : Arrays.asList("first", "second") ){
 
             if(RegisterManager.getInstance().isRegistering((Player) sender, auxPhase)){
 

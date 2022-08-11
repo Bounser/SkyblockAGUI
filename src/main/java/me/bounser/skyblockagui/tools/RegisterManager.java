@@ -98,7 +98,7 @@ public class RegisterManager {
         // Calculating the difference between the first and second position.
         int height = first.getBlockY() - second.getBlockY() +1;
         int width;
-        Bukkit.broadcastMessage(data.getFacing(schem,type));
+
         if (data.getFacing(schem, type).equalsIgnoreCase("west") ||
             data.getFacing(schem, type).equalsIgnoreCase("east")) {
             width = abs(abs(first.getBlockZ()) - abs(second.getBlockZ())) +1;

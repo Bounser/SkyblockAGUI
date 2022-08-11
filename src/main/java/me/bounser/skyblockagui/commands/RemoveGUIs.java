@@ -27,17 +27,13 @@ public class RemoveGUIs implements CommandExecutor {
                 return false;
             }
         }
-        if(args.length != 1){
-            sender.sendMessage(ChatColor.RED + "This action will delete ALL island GUIs. If you are sure execute: /removeguis confirm");
-            return false;
-        }
 
-        if(args[0].equalsIgnoreCase("confirm")){
+        if(args.length == 1 && args[0].equalsIgnoreCase("confirm")){
             Data data = Data.getInstance();
             int i = 0;
             for (GuiWallInstance gwi : GuiWallManager.getInstance().getActiveInstances()) {
                 for (String schem : data.getSchematics()) {
-                    for (String type : new ArrayList<String>(Arrays.asList("overworld", "nether", "the_end"))) {
+                    for (String type : Arrays.asList("overworld", "nether", "the_end")) {
                         Location loc = new Location(gwi.getLocation().getWorld(), gwi.getLocation().getX(), gwi.getLocation().getY(), gwi.getLocation().getZ());
                         if (data.getSchematic(SuperiorSkyblockAPI.getIslandAt(loc)) == schem &&
                                 gwi.getLayout().getName().equals(Data.getInstance().getLayout(schem, type))){
@@ -50,7 +46,8 @@ public class RemoveGUIs implements CommandExecutor {
                 }
             }
             sender.sendMessage(ChatColor.RED + "You deleted: " + i + " GUI(s).");
-            return false;
+        } else {
+            sender.sendMessage(ChatColor.RED + "This action will delete ALL island GUIs. If you are sure execute: /removeguis confirm");
         }
         return false;
     }

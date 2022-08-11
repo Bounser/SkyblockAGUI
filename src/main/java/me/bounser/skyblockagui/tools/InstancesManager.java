@@ -34,16 +34,19 @@ public class InstancesManager {
 
         for(String type : Arrays.asList("overworld", "nether", "the_end") ) {
 
+            Bukkit.broadcastMessage(String.valueOf(is.isNetherEnabled()));
+            Bukkit.broadcastMessage(String.valueOf(is.isEndEnabled()));
+
             if(((type.equals("nether") && is.isNetherEnabled()) ||
                (type.equals("the_end") && is.isEndEnabled()) ||
                 type.equals("overworld")) &&
                 data.getEnabledGUI(schem, type)) {
 
-                Location guiLoc = data.getPlacingLocation(is, type);
                 if (!InstancesManager.getInstance().checkGUI(data.getPlacingLocation(is, type))) {
                     for (Chunk c : is.getAllChunks(data.getEnviromentFromType(type))) {
                         if (!c.isLoaded()) c.load();
                     }
+                    Bukkit.broadcastMessage("Puesto " + type);
                     InstancesManager.getInstance().placeGUI(
                             data.getPlacingLocation(is, type),
                             data.getDirection(schem, type),
@@ -110,14 +113,12 @@ public class InstancesManager {
     // 2 - Remove GUIs if the owner isn't on the island.
     // 3 - Remove GUIs if any member isn't online.
     public void executeDynamicRemoval(Location loc){
-        Bukkit.broadcastMessage("DynamicRemoval");
         Island is = SuperiorSkyblockAPI.getIslandAt(loc);
         if(is == null) return;
 
         switch(Data.getInstance().getMode()){
 
             case 1:
-                Bukkit.broadcastMessage("RIntentando 1");
                 boolean none = true;
                 for(SuperiorPlayer p : is.getAllPlayersInside()){
                     if(is.getIslandMembers().contains(p)){
@@ -126,11 +127,9 @@ public class InstancesManager {
                 }
                 if(none){
                     InstancesManager.getInstance().removeAllIslandGUIs(is);
-                    Bukkit.broadcastMessage("Removing");
                 } break;
 
             case 2:
-                Bukkit.broadcastMessage("RIntentando 2");
                 boolean owner = true;
                 for(SuperiorPlayer p : is.getAllPlayersInside()){
                     if(is.getOwner().equals(p)){
@@ -139,11 +138,9 @@ public class InstancesManager {
                 }
                 if(owner){
                     InstancesManager.getInstance().removeAllIslandGUIs(is);
-                    Bukkit.broadcastMessage("Removing");
                 } break;
 
             case 3:
-                Bukkit.broadcastMessage("RIntentando 3");
                 boolean online = true;
                 for(Player p : Bukkit.getOnlinePlayers()){
                     if(is.getIslandMembers().contains(p)){
@@ -152,39 +149,30 @@ public class InstancesManager {
                 }
                 if(online){
                     InstancesManager.getInstance().removeAllIslandGUIs(is);
-                    Bukkit.broadcastMessage("Removing");
                 } break;
         }
     }
     public void executeDynamicPlacement(Player player, Boolean at){
-        Bukkit.broadcastMessage("DynamicPlacement");
         Island is = null;
         if(at){ is = SuperiorSkyblockAPI.getIslandAt(player.getLocation()); }
         else { is = SuperiorSkyblockAPI.getPlayer(player).getIsland(); }
         if((is != null) && Data.getInstance().getMode() != 3){
             switch(Data.getInstance().getMode()) {
                 case 1:
-                    Bukkit.broadcastMessage("Intentando 1");
                     if (is.getIslandMembers(true).contains(SuperiorSkyblockAPI.getPlayer(player))) {
-                        Bukkit.broadcastMessage("Setuping");
                         InstancesManager.getInstance().setupGUIs(is);
-                        Bukkit.broadcastMessage("Setuping1");
                     }
                     break;
                 case 2:
-                    Bukkit.broadcastMessage("Intentando 2");
                     if (is.getOwner().getName().equals(player.getName())) {
 
                         InstancesManager.getInstance().setupGUIs(is);
-                        Bukkit.broadcastMessage("Setuping");
                     } break;
             }
         } else {
-            Bukkit.broadcastMessage("Intentando 3");
             for(Island island : SuperiorSkyblockAPI.getGrid().getIslands())
                 if(island.isMember(SuperiorSkyblockAPI.getPlayer(player))){
                     InstancesManager.getInstance().setupGUIs(island);
-                    Bukkit.broadcastMessage("Setuping");
                 }
             }
         }
@@ -197,5 +185,4 @@ public class InstancesManager {
 
         }
     }
-
 }
