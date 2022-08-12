@@ -1,0 +1,11 @@
+name: SkyblockAGUI
+version: '1.0'
+main: me.bounser.skyblockagui.SkyblockAGUI
+api-version: 1.18
+depend: [ AdvancedGUI, SuperiorSkyblock2 ]
+authors: [ bounser ]
+description: Give your skyblock islands GUIs!
+commands:
+  setguilocation:
+  cancel:
+  removeguis:
