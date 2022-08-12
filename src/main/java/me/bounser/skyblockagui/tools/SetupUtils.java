@@ -43,18 +43,10 @@ public class SetupUtils {
             }
 
             switch (data.getDirection(schem, type).toString().toLowerCase()) {
-                case "west":
-                    placingLoc.add(0, 0, +1);
-                    break;
-                case "east":
-                    placingLoc.add(0, 0, -1);
-                    break;
-                case "north":
-                    placingLoc.add(-1, 0, 0);
-                    break;
-                case "south":
-                    placingLoc.add(+1, 0, 0);
-                    break;
+                case "west": placingLoc.add(0, 0, +1); break;
+                case "east": placingLoc.add(0, 0, -1); break;
+                case "north": placingLoc.add(-1, 0, 0); break;
+                case "south": placingLoc.add(+1, 0, 0); break;
             }
         }
     }
@@ -89,18 +81,10 @@ public class SetupUtils {
             }
 
             switch (data.getDirection(schem, type).toString().toLowerCase()) {
-                case "west":
-                    loc.add(0, 0, +1);
-                    break;
-                case "east":
-                    loc.add(0, 0, -1);
-                    break;
-                case "north":
-                    loc.add(-1, 0, 0);
-                    break;
-                case "south":
-                    loc.add(+1, 0, 0);
-                    break;
+                case "west": loc.add(0, 0, +1); break;
+                case "east": loc.add(0, 0, -1); break;
+                case "north": loc.add(-1, 0, 0); break;
+                case "south": loc.add(+1, 0, 0); break;
             }
         }
     }
@@ -118,18 +102,10 @@ public class SetupUtils {
         loc.add(0, +1, 0);
 
         switch (data.getDirection(schem, type).toString().toLowerCase()) {
-            case "west":
-                loc.add(+1, 0, 0);
-                break;
-            case "east":
-                loc.add(-1, 0, 0);
-                break;
-            case "north":
-                loc.add(0, 0, +1);
-                break;
-            case "south":
-                loc.add(0, 0, -1);
-                break;
+            case "west": loc.add(+1, 0, 0); break;
+            case "east": loc.add(-1, 0, 0); break;
+            case "north": loc.add(0, 0, +1); break;
+            case "south": loc.add(0, 0, -1); break;
         }
 
         for (int i = 0; i < width; i++) {
@@ -143,18 +119,10 @@ public class SetupUtils {
             }
 
             switch (data.getDirection(schem, type).toString().toLowerCase()) {
-                case "west":
-                    loc.add(0, 0, +1);
-                    break;
-                case "east":
-                    loc.add(0, 0, -1);
-                    break;
-                case "north":
-                    loc.add(-1, 0, 0);
-                    break;
-                case "south":
-                    loc.add(+1, 0, 0);
-                    break;
+                case "west": loc.add(0, 0, +1); break;
+                case "east": loc.add(0, 0, -1); break;
+                case "north": loc.add(-1, 0, 0); break;
+                case "south": loc.add(+1, 0, 0); break;
             }
         }
     }

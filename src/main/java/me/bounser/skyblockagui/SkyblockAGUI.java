@@ -26,7 +26,7 @@ public final class SkyblockAGUI extends JavaPlugin {
 
         Data data = Data.getInstance();
 
-        // GUI creation/disband
+        // Island creation/disband
         Bukkit.getPluginManager().registerEvents(new IslandListener(), this);
 
         // Resources regarding dynamic placing

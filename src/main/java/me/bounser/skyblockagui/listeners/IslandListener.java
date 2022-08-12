@@ -20,6 +20,7 @@ public class IslandListener implements Listener {
                 InstancesManager.getInstance().setupGUIs(e.getIsland());
             }
         }.runTaskLater(SkyblockAGUI.getInstance(), 5);
+
     }
 
     // Removes GUI when disbanding the island.

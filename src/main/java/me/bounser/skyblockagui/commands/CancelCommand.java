@@ -31,6 +31,7 @@ public class CancelCommand implements CommandExecutor {
 
             }
         }
+
         if(phase == null) {
             sender.sendMessage(ChatColor.BLUE + "There's nothing to cancel."); }
         else {

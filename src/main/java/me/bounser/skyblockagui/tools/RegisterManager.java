@@ -120,5 +120,6 @@ public class RegisterManager {
                 data.getDirection(schem, type),
                 data.getLayout(schem, type),
                 false);
+
     }
 }

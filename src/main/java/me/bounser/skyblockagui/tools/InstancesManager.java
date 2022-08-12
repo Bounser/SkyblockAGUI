@@ -110,6 +110,7 @@ public class InstancesManager {
     // 2 - Remove GUIs if the owner isn't on the island.
     // 3 - Remove GUIs if any member isn't online.
     public void executeDynamicRemoval(Location loc){
+
         Island is = SuperiorSkyblockAPI.getIslandAt(loc);
         if(is == null) return;
 

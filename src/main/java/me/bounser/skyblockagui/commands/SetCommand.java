@@ -15,12 +15,15 @@ public class SetCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if(sender instanceof Player){
+
             if(RegisterManager.getInstance().isRegistering((Player) sender, "checkBoth")){
                 sender.sendMessage(ChatColor.RED + "You are already placing a GUI! cancel with /cancel"); return false;
             }
+
             if(SuperiorSkyblockAPI.getIslandAt(((Player) sender).getLocation())==null){
                 sender.sendMessage(ChatColor.RED + "You are not on a valid island!"); return false;
             }
+
             if(args.length != 1){
                 sender.sendMessage(ChatColor.RED + "Invalid usage of the command. Use: /setlocation <layoutName>"); return false;
             }

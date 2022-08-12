@@ -30,5 +30,6 @@ public class ConnectionListener implements Listener {
                 if(Data.getInstance().dynamicPlacing()) InstancesManager.getInstance().executeDynamicRemoval(loc);
             }
         }.runTaskLater(SkyblockAGUI.getInstance(), 3);
+
     }
 }

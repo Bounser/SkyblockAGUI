@@ -33,5 +33,6 @@ public class TeleportListener implements Listener {
                 if(SuperiorSkyblockAPI.getIslandAt(e.getTo()) != null) InstancesManager.getInstance().executeDynamicPlacement(e.getPlayer(), true);
             }
         }.runTaskLater(SkyblockAGUI.getInstance(), 3);
+
     }
 }

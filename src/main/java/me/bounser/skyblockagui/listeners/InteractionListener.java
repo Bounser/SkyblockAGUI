@@ -32,5 +32,6 @@ public class InteractionListener implements Listener {
             regist.saveSecondPosition(p, entity);
 
         }
+
     }
 }
