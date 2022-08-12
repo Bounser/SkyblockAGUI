@@ -38,7 +38,7 @@ public class SetCommand implements CommandExecutor {
                 return false;
             }
 
-            sender.sendMessage(ChatColor.GREEN + "You started the registering mode! Right-click in the top left corner of the desired location.");
+            sender.sendMessage(ChatColor.GREEN + "You started to register a GUI (" + args[0] + ")! Right-click on the top left corner of the desired location.");
             RegisterManager.getInstance().setPlayerFirstRegister((Player) sender);
 
             Data data = Data.getInstance();

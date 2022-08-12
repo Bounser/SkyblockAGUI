@@ -34,7 +34,6 @@ public final class SkyblockAGUI extends JavaPlugin {
             Bukkit.getPluginManager().registerEvents(new TeleportListener(), this);
             Bukkit.getPluginManager().registerEvents(new ConnectionListener(), this);
 
-            // Creates GUIs in case there is any player online (Forcing reload)
             InstancesManager.getInstance().checkForPlayers();
 
             Bukkit.getLogger().info("Dynamic placing module loaded.");

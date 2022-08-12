@@ -20,13 +20,12 @@ public class RegisterManager {
 
     public static RegisterManager getInstance(){
         if(instance == null) instance = new RegisterManager();
-
         return instance;
     }
 
     // Lists containing all the players registering the specific step. (First or second)
-    List firstR = new ArrayList<Player>();
-    List secondR = new ArrayList<Player>();
+    List<Player> firstR = new ArrayList<Player>();
+    List<Player> secondR = new ArrayList<Player>();
 
     public void setPlayerFirstRegister(Player p){ firstR.add(p); }
     public void setPlayerSecondRegister(Player p){ secondR.add(p); }
@@ -68,7 +67,7 @@ public class RegisterManager {
 
         // Feedback
         removeRegister(player, "first");
-        player.sendMessage(ChatColor.GREEN + "First position set correctly!");
+        player.sendMessage(ChatColor.GREEN + "First position set correctly! Click on the bottom right item frame to finish registering the GUI");
 
         // Starts registering the second position.
         new BukkitRunnable() {
@@ -112,7 +111,6 @@ public class RegisterManager {
 
         // Feedback.
         player.sendMessage(ChatColor.GREEN + "Second position set correctly");
-        player.sendMessage(ChatColor.GREEN + "GUI registered correctly!");
 
         removeRegister(player, "second");
         InstancesManager.getInstance().placeGUI(
@@ -120,6 +118,8 @@ public class RegisterManager {
                 data.getDirection(schem, type),
                 data.getLayout(schem, type),
                 false);
+
+        player.sendMessage(ChatColor.GREEN + "GUI registered correctly!");
 
     }
 }

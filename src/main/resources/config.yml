@@ -1,15 +1,16 @@
 # General options.
 #
 Options:
-  # Change the radius from the GUIs placed in the islands. (Not recommended to use big values (>8))
+  # Change the radius from the GUIs placed on the islands. (Not recommended to use big values (>8))
   activation_radius: 6
   # Use this option to change all the blocks behind the GUI every time the GUI is loaded.
   replace_blocks:
     enabled: true
     material: STONE
-  # Every time the GUI is loaded it will remove every block (And residual frames) that is in the screen (E.g. in case the player pushes a block with a piston)
+  # Every time the GUI is loaded it will remove every block (And residual frames) that are in the screen (E.g. in case the player pushes a block with a piston)
   remove_screen_blocks: true
   # Enables the dynamic placing. If you disable it, the plugin will only place the GUIs and they'll stay permanently.
+  # If you want to change this setting use /removeguis to remove all the permanent GUIs related to islands.
   dynamicPlacing:
     enabled: false
     # Modes available:
@@ -19,7 +20,7 @@ Options:
     # 3 = Places the GUI if a member of the island is online
     mode: 2
 
-# All the schematics in which you will place GUIs
+# All the schematics that will be affected.
 
 schematics:
   - "normal"
@@ -37,12 +38,12 @@ GUIs:
       # Place GUI? If its set to false no GUI will be placed.
       enabled: true
       # Offset of the GUI from the center of the island.
-      # Recommended to use the command /setguilocation <Layout>
+      # Recommended using the command /setguilocation <Layout>
       offset:
         x: 12
         y: 3
         z: 3
-      # Orientation of the GUI. (Also recommended to use the command)
+      # Orientation of the GUI. (Also recommended using the command)
       facing: west
       # Layout that will be used.
       layout: "SuperiorGUI"

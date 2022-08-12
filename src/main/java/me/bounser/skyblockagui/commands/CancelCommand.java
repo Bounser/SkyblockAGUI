@@ -1,6 +1,7 @@
 package me.bounser.skyblockagui.commands;
 
 import me.bounser.skyblockagui.tools.RegisterManager;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,12 +18,13 @@ public class CancelCommand implements CommandExecutor {
 
         if(!(sender instanceof Player)) {
 
-            System.out.printf(ChatColor.RED + "Command is not available for console.");
+            Bukkit.getLogger().info(ChatColor.RED + "Command is not available for console.");
             return false;
         }
 
         if (!sender.hasPermission("skyblockagui.admin")) {
-            sender.sendMessage(ChatColor.RED + "You don't have the required permission! (skyblockagui.admin)"); return false;
+            sender.sendMessage(ChatColor.RED + "You don't have the required permission! (skyblockagui.admin)");
+            return false;
         }
 
         String phase = null;
@@ -38,7 +40,7 @@ public class CancelCommand implements CommandExecutor {
         }
 
         if(phase == null) {
-            sender.sendMessage(ChatColor.BLUE + "There's nothing to cancel."); }
+            sender.sendMessage(ChatColor.BLUE + "There is nothing to cancel."); }
         else {
             sender.sendMessage(ChatColor.RED +"You are no longer registering the "+ ChatColor.GREEN + phase + ChatColor.RED +" position.");
         }

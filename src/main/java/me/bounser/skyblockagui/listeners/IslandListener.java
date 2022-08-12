@@ -11,6 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class IslandListener implements Listener {
 
+    // PLaces the GUI in the specific world type when the schematic is pasted.
     @EventHandler
     public void onIslandSchematicPaste(IslandSchematicPasteEvent e){
 

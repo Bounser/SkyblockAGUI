@@ -13,9 +13,7 @@ public class SetupUtils {
     private static SetupUtils instance;
 
     public static SetupUtils getInstance() {
-        if (instance != null) return instance;
-
-        SetupUtils.instance = new SetupUtils();
+        if (instance == null) instance = new SetupUtils();
         return instance;
     }
 

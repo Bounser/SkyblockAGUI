@@ -22,11 +22,10 @@ public class InstancesManager {
 
     public static InstancesManager getInstance(){
         if(instance == null) instance = new InstancesManager();
-
         return instance;
     }
 
-    // Place all the GUIs of an island: overworld, nether and end. (In case these are loaded)
+    // Place all the GUIs of an island: overworld, nether and end. (In case these are unlocked)
     public void setupGUIs(Island is){
 
         Data data = Data.getInstance();
@@ -102,11 +101,11 @@ public class InstancesManager {
     // Get the GUI at the specific location.
     public GuiWallInstance getGUI(Location loc){ return GuiWallManager.getInstance().getActiveInstance(loc); }
 
-    // Check if there's any GUI in the specific location.
+    // Check if there is any GUI in the specific location.
     public boolean checkGUI(Location loc){ if(getGUI(loc) != null) return true; return false; }
 
     // Removes GUIs depending on the mode:
-    // 0 - Remove GUIs no one is on the island.
+    // 0 - Remove GUIs if no one is on the island.
     // 1 - Remove GUIs if there isn't any member on the island.
     // 2 - Remove GUIs if the owner isn't on the island.
     // 3 - Remove GUIs if any member isn't online.
@@ -152,6 +151,8 @@ public class InstancesManager {
                 break;
         }
     }
+
+    // Opposed to DynamicRemoval
     public void executeDynamicPlacement(Player player, Boolean at){
         Island is = null;
         if(at){ is = SuperiorSkyblockAPI.getIslandAt(player.getLocation()); }
@@ -175,9 +176,8 @@ public class InstancesManager {
             for(Island island : SuperiorSkyblockAPI.getGrid().getIslands())
                 if(island.isMember(SuperiorSkyblockAPI.getPlayer(player)))
                     InstancesManager.getInstance().setupGUIs(island);
-            }
         }
-
+    }
 
     public void checkForPlayers(){
         for(Player p : Bukkit.getServer().getOnlinePlayers()){

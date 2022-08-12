@@ -20,10 +20,13 @@ public class TeleportListener implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
+
                 if (SuperiorSkyblockAPI.getIslandAt(e.getFrom()) != null)
                     InstancesManager.getInstance().executeDynamicRemoval(e.getFrom());
+
                 if(SuperiorSkyblockAPI.getIslandAt(e.getTo()) != null)
                     InstancesManager.getInstance().executeDynamicPlacement(e.getPlayer(), true);
+
             }
         }.runTaskLater(SkyblockAGUI.getInstance(), 3);
 
