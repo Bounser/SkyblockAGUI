@@ -40,9 +40,9 @@ public class RegisterManager {
 
     public boolean isRegistering(Player p, String phase){
         switch(phase){
-            case "first": if(firstR.contains(p)) return true; break;
-            case "second": if(secondR.contains(p)) return true; break;
-            case "checkBoth": if(firstR.contains(p) || secondR.contains(p)) return true; break;
+            case "first": if(firstR.contains(p)) return true;
+            case "second": if(secondR.contains(p)) return true;
+            case "checkBoth": if(firstR.contains(p) || secondR.contains(p)) return true;
         }
         return false;
     }

@@ -15,7 +15,14 @@ public class ConnectionListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
 
-        if(Data.getInstance().dynamicPlacing()) InstancesManager.getInstance().executeDynamicPlacement(e.getPlayer(), true);
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if(Data.getInstance().dynamicPlacing())
+                    InstancesManager.getInstance().executeDynamicPlacement(e.getPlayer(), true);
+            }
+        }.runTaskLater(SkyblockAGUI.getInstance(), 3);
 
     }
 
@@ -27,7 +34,8 @@ public class ConnectionListener implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if(Data.getInstance().dynamicPlacing()) InstancesManager.getInstance().executeDynamicRemoval(loc);
+                if(Data.getInstance().dynamicPlacing())
+                    InstancesManager.getInstance().executeDynamicRemoval(loc);
             }
         }.runTaskLater(SkyblockAGUI.getInstance(), 3);
 

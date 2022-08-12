@@ -44,7 +44,6 @@ public class SetCommand implements CommandExecutor {
         } else {
             System.out.printf("Command is not available for console.");
         }
-
         return false;
     }
 }
