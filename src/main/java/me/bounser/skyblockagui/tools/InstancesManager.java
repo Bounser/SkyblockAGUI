@@ -106,6 +106,7 @@ public class InstancesManager {
     public boolean checkGUI(Location loc){ if(getGUI(loc) != null) return true; return false; }
 
     // Removes GUIs depending on the mode:
+    // 0 - Remove GUIs no one is on the island.
     // 1 - Remove GUIs if there isn't any member on the island.
     // 2 - Remove GUIs if the owner isn't on the island.
     // 3 - Remove GUIs if any member isn't online.

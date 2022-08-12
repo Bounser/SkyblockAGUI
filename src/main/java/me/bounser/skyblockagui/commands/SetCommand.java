@@ -3,6 +3,7 @@ package me.bounser.skyblockagui.commands;
 import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
 import me.bounser.skyblockagui.tools.Data;
 import me.bounser.skyblockagui.tools.RegisterManager;
+import me.leoko.advancedgui.manager.LayoutManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,6 +27,11 @@ public class SetCommand implements CommandExecutor {
 
             if(args.length != 1){
                 sender.sendMessage(ChatColor.RED + "Invalid usage of the command. Use: /setlocation <layoutName>"); return false;
+            }
+
+            if(LayoutManager.getInstance().getLayout(args[0]) == (null)){
+                sender.sendMessage(ChatColor.RED + "That layout is not valid.");
+                return false;
             }
 
             sender.sendMessage(ChatColor.GREEN + "You started the registering mode! Right-click in the top left corner of the desired location.");
