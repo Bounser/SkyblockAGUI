@@ -16,8 +16,13 @@ public class CancelCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if(!(sender instanceof Player)) {
+
             System.out.printf(ChatColor.RED + "Command is not available for console.");
             return false;
+        }
+
+        if (!sender.hasPermission("skyblockagui.admin")) {
+            sender.sendMessage(ChatColor.RED + "You don't have the required permission! (skyblockagui.admin)"); return false;
         }
 
         String phase = null;

@@ -17,6 +17,10 @@ public class SetCommand implements CommandExecutor {
 
         if(sender instanceof Player){
 
+            if (!sender.hasPermission("skyblockagui.admin")) {
+                sender.sendMessage(ChatColor.RED + "You don't have the required permission! (skyblockagui.admin)"); return false;
+            }
+
             if(RegisterManager.getInstance().isRegistering((Player) sender, "checkBoth")){
                 sender.sendMessage(ChatColor.RED + "You are already placing a GUI! cancel with /cancel"); return false;
             }
