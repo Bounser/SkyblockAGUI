@@ -115,39 +115,40 @@ public class InstancesManager {
         if(is == null) return;
 
         switch(Data.getInstance().getMode()){
+            case 0:
+                if(is.getAllPlayersInside().isEmpty())
+                    InstancesManager.getInstance().removeAllIslandGUIs(is);
+                break;
 
             case 1:
                 boolean none = true;
                 for(SuperiorPlayer p : is.getAllPlayersInside()){
-                    if(is.getIslandMembers().contains(p)){
+                    if(is.getIslandMembers().contains(p))
                         none = false;
-                    }
                 }
-                if(none){
+                if(none)
                     InstancesManager.getInstance().removeAllIslandGUIs(is);
-                } break;
+                break;
 
             case 2:
                 boolean owner = true;
                 for(SuperiorPlayer p : is.getAllPlayersInside()){
-                    if(is.getOwner().equals(p)){
+                    if(is.getOwner().equals(p))
                         owner = false;
-                    }
                 }
-                if(owner){
+                if(owner)
                     InstancesManager.getInstance().removeAllIslandGUIs(is);
-                } break;
+                break;
 
             case 3:
                 boolean online = true;
                 for(Player p : Bukkit.getOnlinePlayers()){
-                    if(is.getIslandMembers().contains(p)){
+                    if(is.getIslandMembers().contains(p))
                         online = false;
-                    }
                 }
-                if(online){
+                if(online)
                     InstancesManager.getInstance().removeAllIslandGUIs(is);
-                } break;
+                break;
         }
     }
     public void executeDynamicPlacement(Player player, Boolean at){
@@ -156,22 +157,23 @@ public class InstancesManager {
         else { is = SuperiorSkyblockAPI.getPlayer(player).getIsland(); }
         if((is != null) && Data.getInstance().getMode() != 3){
             switch(Data.getInstance().getMode()) {
-                case 1:
-                    if (is.getIslandMembers(true).contains(SuperiorSkyblockAPI.getPlayer(player))) {
+                case 0:
+                    if (!is.getAllPlayersInside().isEmpty())
                         InstancesManager.getInstance().setupGUIs(is);
-                    }
+                    break;
+                case 1:
+                    if (is.getIslandMembers(true).contains(SuperiorSkyblockAPI.getPlayer(player)))
+                        InstancesManager.getInstance().setupGUIs(is);
                     break;
                 case 2:
-                    if (is.getOwner().getName().equals(player.getName())) {
-
+                    if (is.getOwner().getName().equals(player.getName()))
                         InstancesManager.getInstance().setupGUIs(is);
-                    } break;
+                    break;
             }
         } else {
             for(Island island : SuperiorSkyblockAPI.getGrid().getIslands())
-                if(island.isMember(SuperiorSkyblockAPI.getPlayer(player))){
+                if(island.isMember(SuperiorSkyblockAPI.getPlayer(player)))
                     InstancesManager.getInstance().setupGUIs(island);
-                }
             }
         }
 
