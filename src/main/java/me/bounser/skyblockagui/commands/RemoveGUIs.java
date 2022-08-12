@@ -43,8 +43,8 @@ public class RemoveGUIs implements CommandExecutor {
                         if (data.getSchematic(SuperiorSkyblockAPI.getIslandAt(loc)) == schem &&
                                 gwi.getLayout().getName().equals(Data.getInstance().getLayout(schem, type))){
 
-                            SetupUtils.getInstance().clearArea(SuperiorSkyblockAPI.getIslandAt(loc), data.getType(loc));
                             GuiWallManager.getInstance().unregisterInstance(gwi, true);
+                            SetupUtils.getInstance().clearArea(SuperiorSkyblockAPI.getIslandAt(loc), data.getType(loc));
                             i++;
                         }
                     }
