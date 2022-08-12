@@ -31,6 +31,7 @@ public class IslandListener implements Listener {
 
     }
 
+    // If the role of a player changes while on an island, the dynamic palcing will be executed (Mode 2)
     @EventHandler
     public void onRolChange(PlayerChangeRoleEvent e){
 

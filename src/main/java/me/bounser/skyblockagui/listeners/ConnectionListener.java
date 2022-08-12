@@ -15,7 +15,6 @@ public class ConnectionListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
 
-
         new BukkitRunnable() {
             @Override
             public void run() {

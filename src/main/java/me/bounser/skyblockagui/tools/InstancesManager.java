@@ -26,7 +26,7 @@ public class InstancesManager {
         return instance;
     }
 
-    // Place all the GUIs of an island: overworld, nether and end.
+    // Place all the GUIs of an island: overworld, nether and end. (In case these are loaded)
     public void setupGUIs(Island is){
 
         Data data = Data.getInstance();
