@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f982dbf-cf37-46c7-9e62-83bd703c1511" name="Changes" comment="Layout check">
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/commands/SetCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/commands/SetCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/listeners/ConnectionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/listeners/ConnectionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/listeners/TeleportListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/listeners/TeleportListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/tools/RegisterManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/tools/RegisterManager.java" afterDir="false" />
-    </list>
+    <list default="true" id="9f982dbf-cf37-46c7-9e62-83bd703c1511" name="Changes" comment="Teleport fix" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -80,7 +75,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660290340855</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Teleport fix">
+      <created>1660294537010</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1660294537010</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -98,6 +100,7 @@
     <MESSAGE value="Minor changes" />
     <MESSAGE value="Mode 0 implemented" />
     <MESSAGE value="Layout check" />
-    <option name="LAST_COMMIT_MESSAGE" value="Layout check" />
+    <MESSAGE value="Teleport fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Teleport fix" />
   </component>
 </project>
