@@ -68,7 +68,7 @@ public class InstancesManager {
         GuiWallManager.getInstance().registerInstance(
                 new GuiWallInstance(
                         GuiWallManager.getInstance().getNextId(),
-                        LayoutManager.getInstance().getLayout(Layout), Data.getInstance().getRadius(),
+                        LayoutManager.getInstance().getLayout(Layout), data.getRadius(),
                         new GuiLocation(loc, dir)), persistant
         );
     }

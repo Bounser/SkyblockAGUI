@@ -3,6 +3,7 @@ package me.bounser.skyblockagui;
 import me.bounser.skyblockagui.commands.CancelCommand;
 import me.bounser.skyblockagui.commands.RemoveGUIs;
 import me.bounser.skyblockagui.commands.SetCommand;
+import me.bounser.skyblockagui.commands.SetTabComplete;
 import me.bounser.skyblockagui.listeners.ConnectionListener;
 import me.bounser.skyblockagui.listeners.InteractionListener;
 import me.bounser.skyblockagui.listeners.IslandListener;
@@ -46,6 +47,8 @@ public final class SkyblockAGUI extends JavaPlugin {
         getCommand("setguilocation").setExecutor(new SetCommand());
         getCommand("cancel").setExecutor(new CancelCommand());
         getCommand("removeguis").setExecutor(new RemoveGUIs());
+
+        getCommand("setguilocation").setTabCompleter(new SetTabComplete());
 
         Bukkit.getLogger().info("Plugin successfully loaded.");
     }
