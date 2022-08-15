@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.material.Directional;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -30,18 +31,16 @@ public class RegisterManager {
     public void setPlayerFirstRegister(Player p){ firstR.add(p); }
     public void setPlayerSecondRegister(Player p){ secondR.add(p); }
 
-    public void removeRegister(Player p, String phase) {
-        switch (phase) {
-            case "first": firstR.remove(p); break;
-            case "second": secondR.remove(p); break;
-        }
+    public void removeRegister(Player p) {
+        firstR.remove(p);
+        secondR.remove(p);
     }
 
     public boolean isRegistering(Player p, String phase){
         switch(phase){
-            case "first": if(firstR.contains(p)) return true;
-            case "second": if(secondR.contains(p)) return true;
-            case "checkBoth": if(firstR.contains(p) || secondR.contains(p)) return true;
+            case "first": if(firstR.contains(p)) return true; break;
+            case "second": if(secondR.contains(p)) return true; break;
+            case "checkBoth": if(firstR.contains(p) || secondR.contains(p)) return true; break;
         }
         return false;
     }
@@ -63,10 +62,10 @@ public class RegisterManager {
         data.setValue(schem, type, "offset.z", interact.getBlockZ() - center.getBlockZ());
 
         // Gets the direction from the entity.
-        data.setString(schem, type, "facing", entity.getFacing().toString().toLowerCase());
+        data.setString(schem, type, "facing", ((Directional) entity).getFacing().toString().toLowerCase());
 
         // Feedback
-        removeRegister(player, "first");
+        removeRegister(player);
         player.sendMessage(ChatColor.GREEN + "First position set correctly! Click on the bottom right item frame to finish registering the GUI");
 
         // Starts registering the second position.
@@ -112,7 +111,7 @@ public class RegisterManager {
         // Feedback.
         player.sendMessage(ChatColor.GREEN + "Second position set correctly");
 
-        removeRegister(player, "second");
+        removeRegister(player);
         InstancesManager.getInstance().placeGUI(
                 data.getPlacingLocation(is, type),
                 data.getDirection(schem, type),

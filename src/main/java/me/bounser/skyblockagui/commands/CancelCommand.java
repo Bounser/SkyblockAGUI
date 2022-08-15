@@ -33,7 +33,7 @@ public class CancelCommand implements CommandExecutor {
 
             if(RegisterManager.getInstance().isRegistering((Player) sender, auxPhase)){
 
-                RegisterManager.getInstance().removeRegister((Player) sender, auxPhase);
+                RegisterManager.getInstance().removeRegister((Player) sender);
                 phase = auxPhase;
 
             }

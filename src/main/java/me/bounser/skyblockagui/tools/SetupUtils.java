@@ -1,12 +1,17 @@
 package me.bounser.skyblockagui.tools;
 
 import com.bgsoftware.superiorskyblock.api.island.Island;
+import com.cryptomorin.xseries.XMaterial;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.GlowItemFrame;
 import org.bukkit.entity.ItemFrame;
+
+import java.util.Arrays;
+import java.util.Objects;
 
 public class SetupUtils {
 
@@ -34,9 +39,16 @@ public class SetupUtils {
 
             for (int j = 0; j < height; j++) {
 
-                GlowItemFrame itemFrame = (GlowItemFrame) placingLoc.getWorld().spawnEntity(placingLoc, EntityType.GLOW_ITEM_FRAME);
-                itemFrame.setVisible(false);
+                if(useGlowItemframes()){
 
+                    GlowItemFrame itemFrame = (GlowItemFrame) placingLoc.getWorld().spawnEntity(placingLoc, EntityType.GLOW_ITEM_FRAME);
+                    itemFrame.setVisible(false);
+
+                } else {
+
+                    Objects.requireNonNull(placingLoc.getWorld()).spawnEntity(placingLoc, EntityType.ITEM_FRAME);
+
+                }
                 placingLoc.add(0, +1, 0);
             }
 
@@ -67,7 +79,7 @@ public class SetupUtils {
 
             for (int j = 0; j < height; j++) {
 
-                if(data.getSetAir())  loc.getBlock().setType(Material.VOID_AIR);
+                if(data.getSetAir())  loc.getBlock().setType(XMaterial.VOID_AIR.parseMaterial());
 
                 for (Entity entity : loc.getWorld().getNearbyEntities(loc, 0.5, 0.5, 0.5)) {
 
@@ -123,5 +135,14 @@ public class SetupUtils {
                 case "south": loc.add(+1, 0, 0); break;
             }
         }
+    }
+
+    public boolean useGlowItemframes() {
+        Boolean glowitemframes = true;
+        String version = Bukkit.getServer().getVersion();
+        for(String ver : Arrays.asList("1.8", "1.9", "1.10", "1.11", "1.12", "1.13", "1.14", "1.15", "1.16")){
+            if(version.contains(ver)) glowitemframes = false;
+        }
+        return glowitemframes;
     }
 }

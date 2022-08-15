@@ -11,7 +11,11 @@ import me.bounser.skyblockagui.listeners.TeleportListener;
 import me.bounser.skyblockagui.tools.Data;
 import me.bounser.skyblockagui.tools.InstancesManager;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
 
 public final class SkyblockAGUI extends JavaPlugin {
 
@@ -23,6 +27,7 @@ public final class SkyblockAGUI extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         instance = this;
 
         Data data = Data.getInstance();
@@ -51,5 +56,9 @@ public final class SkyblockAGUI extends JavaPlugin {
         getCommand("setguilocation").setTabCompleter(new SetTabComplete());
 
         Bukkit.getLogger().info("Plugin successfully loaded.");
+
+        File Layout = new File(this.getDataFolder().getParent() + "/AdvancedGUI/layout/DIO.yml");
+        FileConfiguration LayoutConfig = YamlConfiguration.loadConfiguration(Layout);
+        LayoutConfig.set("test","asd");
     }
 }

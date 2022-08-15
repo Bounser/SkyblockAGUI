@@ -3,6 +3,7 @@ package me.bounser.skyblockagui.tools;
 import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
 import com.bgsoftware.superiorskyblock.api.island.Island;
 import com.bgsoftware.superiorskyblock.api.wrappers.SuperiorPlayer;
+import me.bounser.skyblockagui.SkyblockAGUI;
 import me.leoko.advancedgui.manager.GuiWallManager;
 import me.leoko.advancedgui.manager.LayoutManager;
 import me.leoko.advancedgui.utils.Direction;
@@ -12,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +40,7 @@ public class InstancesManager {
                 type.equals("overworld")) &&
                 data.getEnabledGUI(schem, type)) {
 
-                if (!InstancesManager.getInstance().checkGUI(data.getPlacingLocation(is, type))) {
+                if (!InstancesManager.getInstance().checkGUI(data.getPlacingLocation(is, type)) && data.getPlacingLocation(is, type) != null) {
 
                     for (Chunk c : is.getAllChunks(data.getEnviromentFromType(type))) {
                         if (!c.isLoaded()) c.load();
@@ -62,6 +64,8 @@ public class InstancesManager {
 
         if(data.getReplace()) SetupUtils.getInstance().setBackground(is, type);
         SetupUtils.getInstance().clearArea(is, type);
+
+        SetupUtils.getInstance().setupItemFrames(SuperiorSkyblockAPI.getIslandAt(loc), data.getType(loc));
 
         SetupUtils.getInstance().setupItemFrames(SuperiorSkyblockAPI.getIslandAt(loc), data.getType(loc));
 

@@ -4,15 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f982dbf-cf37-46c7-9e62-83bd703c1511" name="Changes" comment="Tab completion">
+    <list default="true" id="9f982dbf-cf37-46c7-9e62-83bd703c1511" name="Changes" comment="XMaterial shaded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SkyblockAGUI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SkyblockAGUI.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/SkyblockAGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/SkyblockAGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/commands/CancelCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/commands/CancelCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/listeners/InteractionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/listeners/InteractionListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/tools/InstancesManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/tools/InstancesManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/tools/RegisterManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/tools/RegisterManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/tools/SetupUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/bounser/skyblockagui/tools/SetupUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660399532443</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="XMaterial shaded">
+      <created>1660461120708</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1660461120708</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -171,6 +179,7 @@
     <MESSAGE value="Order fix" />
     <MESSAGE value="Fixed comments &amp; messages" />
     <MESSAGE value="Tab completion" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tab completion" />
+    <MESSAGE value="XMaterial shaded" />
+    <option name="LAST_COMMIT_MESSAGE" value="XMaterial shaded" />
   </component>
 </project>
